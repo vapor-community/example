@@ -19,5 +19,5 @@ Route.get("param/:thing") { request in
 }
 
 //start the server up
-let server = HttpServer()
+let server = Server()
 server.run(port: 8080)

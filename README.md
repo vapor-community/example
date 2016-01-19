@@ -1,6 +1,6 @@
 # Vapor Example
 
-Clone this repo and run `swift build` to download the dependencies.
+Clone this repo and run `swift build` to download the dependencies, then run `.build/debug/MyApp`
 
 View [Vapor](https://github.com/tannernelson/vapor) for documentation.
 
