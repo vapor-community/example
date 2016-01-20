@@ -1,2 +1,2 @@
-export LD_LIBRARY_OATH="$PWD/lib"
-./program
+export LD_LIBRARY_PATH="$PWD/lib"
+./MyApp
