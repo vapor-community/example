@@ -8,6 +8,8 @@ Route.get("heartbeat") { request in
 	return ["lub": "dub"]
 }
 
+Route.resource("users", controller: Controller())
+
 Route.get("/heartbeat/alternate", closure: HeartbeatController().index)
 
 Route.get("/test") { request in 
@@ -15,7 +17,7 @@ Route.get("/test") { request in
 }
 
 Route.get("param/:thing") { request in 
-	return "<h1>param test</h1> <pre>Method: \(request.method)\nParams: \(request.parameters)\nQuery: \(request.query)</pre>"	
+	return "<h1>param test</h1> <pre>Method: \(request.method)\nParams: \(request.parameters)\nData: \(request.data)</pre>"	
 }
 
 //start the server up
