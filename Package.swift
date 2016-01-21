@@ -1,7 +1,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "MyApp",
+    name: "VaporApp",
     dependencies: [
         .Package(url: "https://github.com/tannernelson/vapor.git", majorVersion: 1)
     ]
