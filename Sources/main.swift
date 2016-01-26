@@ -22,4 +22,4 @@ Route.get("param/:thing") { request in
 
 //start the server up
 let server = Server()
-server.run(port: 8080)
+server.run(port: 8000)
