@@ -2,8 +2,8 @@ import Vapor
 
 class HeartbeatController: Controller {
 
-	// override func index(request: Request) -> Any {
-	// 	return ["lub": "dub"]
-	// }
+	override func index(request: Request) -> ResponseConvertible {
+		return ["lub": "dub"]
+	}
 
 }

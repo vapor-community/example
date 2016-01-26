@@ -10,9 +10,9 @@ Route.get("heartbeat") { request in
 
 Route.resource("users", controller: Controller())
 
-Route.get("/heartbeat/alternate", closure: HeartbeatController().index)
+Route.get("heartbeat/alternate", closure: HeartbeatController().index)
 
-Route.get("/test") { request in 
+Route.get("test") { request in 
 	return View(path: "index.html")
 }
 
