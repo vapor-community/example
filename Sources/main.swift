@@ -1,12 +1,11 @@
 import Vapor
-import Foundation
 
 Route.get("/") { request in 
 	return View(path: "welcome.html")
 }
 
 Route.get("json") { request in 
-	let response: NSDictionary = [
+	let response: [String: Any] = [
 		"number": 123,
 		"string": "test",
 		"array": [
@@ -22,7 +21,7 @@ Route.get("json") { request in
 }
 
 Route.any("data/:id") { request in
-	let response: NSDictionary = [
+	let response: [String: Any] = [
 		"request.path": request.path,
 		"request.data": request.data,
 		"request.parameters": request.parameters,
@@ -34,7 +33,7 @@ Route.any("data/:id") { request in
 Route.get("session") { request in
 	let response: Response
 	do {
-		let json: NSDictionary = [
+		let json: [String: Any] = [
                         "session.data": request.session.data,
                         "request.cookies": request.cookies,
                         "instructions": "Refresh to see cookie and session get set."
