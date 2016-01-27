@@ -1,4 +1,5 @@
 import Vapor
+import Foundation
 
 Route.get("/") { request in 
 	return View(path: "welcome.html")
