@@ -5,7 +5,7 @@ Route.get("/") { request in
 }
 
 Route.get("json") { request in 
-	return [
+	let response: [String: Any] = [
 		"number": 123,
 		"string": "test",
 		"array": [
@@ -16,15 +16,15 @@ Route.get("json") { request in
 			"lang": "Swift"
 		]
 	]
+
+	return response
 }
 
 Route.any("data/:id") { request in
-	let response = [
-		"request": [
-			"path": request.path,
-			"data": request.data,
-			"parameters": request.parameters,
-		]
+	let response: [String: Any] = [
+		"request.path": request.path,
+		"request.data": request.data,
+		"request.parameters": request.parameters,
 	]
 
 	return response
@@ -33,11 +33,12 @@ Route.any("data/:id") { request in
 Route.get("session") { request in
 	let response: Response
 	do {
-		response = try Response(status: .OK, json: [
-			"session.data": request.session.data,
-			"request.cookies": request.cookies,
-			"instructions": "Refresh to see cookie and session get set."
-		])
+		let json: [String: Any] = [
+                        "session.data": request.session.data,
+                        "request.cookies": request.cookies,
+                        "instructions": "Refresh to see cookie and session get set."
+                ];
+		response = try Response(status: .OK, json: json)
 	} catch {
 		response = Response(error: "Invalid JSON")
 	}
