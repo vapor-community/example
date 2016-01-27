@@ -51,8 +51,8 @@ Route.get("session") { request in
 
 Route.get("heartbeat", closure: HeartbeatController().index)
 
-print("Visit http://localhost:8080")
+print("Visit http://localhost:8000")
 
 let server = Server()
-server.run(port: 8080)
+server.run(port: 8000)
 
