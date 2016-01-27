@@ -1,25 +1,57 @@
 import Vapor
 
 Route.get("/") { request in 
-	return "<h1>Welcome.</h1> Server powered by Swift."
+	return View(path: "welcome.html")
 }
 
-Route.get("heartbeat") { request in
-	return ["lub": "dub"]
+Route.get("json") { request in 
+	return [
+		"number": 123,
+		"string": "test",
+		"array": [
+			0, 1, 2, 3
+		],
+		"dict": [
+			"name": "Vapor",
+			"lang": "Swift"
+		]
+	]
 }
 
-Route.resource("users", controller: Controller())
+Route.any("data/:id") { request in
+	let response = [
+		"request": [
+			"path": request.path,
+			"data": request.data,
+			"parameters": request.parameters,
+		]
+	]
 
-Route.get("heartbeat/alternate", closure: HeartbeatController().index)
-
-Route.get("test") { request in 
-	return View(path: "index.html")
+	return response
 }
 
-Route.get("param/:thing") { request in 
-	return "<h1>param test</h1> <pre>Method: \(request.method)\nParams: \(request.parameters)\nData: \(request.data)</pre>"	
+Route.get("session") { request in
+	let response: Response
+	do {
+		response = try Response(status: .OK, json: [
+			"session.data": request.session.data,
+			"request.cookies": request.cookies,
+			"instructions": "Refresh to see cookie and session get set."
+		])
+	} catch {
+		response = Response(error: "Invalid JSON")
+	}
+
+	request.session.data["name"] = "Vapor"
+	response.cookies["test"] = "123"
+
+	return response
 }
 
-//start the server up
+Route.get("heartbeat", closure: HeartbeatController().index)
+
+print("Visit http://localhost:8080")
+
 let server = Server()
-server.run(port: 8080) //switch to 8080 if port is already in use
+server.run(port: 8080)
+
