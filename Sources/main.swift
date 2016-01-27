@@ -5,7 +5,7 @@ Route.get("/") { request in
 }
 
 Route.get("json") { request in 
-	let response: [String: Any] = [
+	let response: NSDictionary = [
 		"number": 123,
 		"string": "test",
 		"array": [
@@ -21,7 +21,7 @@ Route.get("json") { request in
 }
 
 Route.any("data/:id") { request in
-	let response: [String: Any] = [
+	let response: NSDictionary = [
 		"request.path": request.path,
 		"request.data": request.data,
 		"request.parameters": request.parameters,
@@ -33,7 +33,7 @@ Route.any("data/:id") { request in
 Route.get("session") { request in
 	let response: Response
 	do {
-		let json: [String: Any] = [
+		let json: NSDictionary = [
                         "session.data": request.session.data,
                         "request.cookies": request.cookies,
                         "instructions": "Refresh to see cookie and session get set."
