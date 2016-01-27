@@ -19,4 +19,4 @@ To deploy to Ubuntu 14.04 LTS (without Swift installed on remote server).
 
 or try it out at Swifton.me
 
-[![Deploy to Swifton.me](https://serve.swifton.me/badge.png)](https://serve.swifton.me/oneclick?repository=https://github.com/tannernelson/vapor-example){:target="_blank"}
+[![Deploy to Swifton.me](https://serve.swifton.me/badge.png)](https://serve.swifton.me/oneclick?repository=https://github.com/tannernelson/vapor-example)
