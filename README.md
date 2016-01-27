@@ -1,5 +1,7 @@
 # Vapor Example
 
+Check out the [live demo](http://vapor.tanner.xyz:8080) running on Ubuntu.
+
 Clone this repo and run `swift build` to download the dependencies, then run `.build/debug/VaporApp`
 
 View [Vapor](https://github.com/tannernelson/vapor) for documentation.
