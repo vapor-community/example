@@ -1,7 +1,11 @@
 import Vapor
 
-Route.get("/") { request in 
-	return View(path: "welcome.html")
+Route.get("/") { request in
+	do {
+		return try View(path: "welcome.html")
+	} catch _ {
+		return "Something went wrong."
+	}
 }
 
 Route.get("json") { request in 
