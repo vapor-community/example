@@ -1,4 +1,9 @@
 import Vapor
+import VaporStencil
+
+//set the stencil renderer
+//for all .stencil files
+View.renderers[".stencil"] = StencilRenderer()
 
 Route.get("/") { request in
 	do {
@@ -55,6 +60,13 @@ Route.get("session") { request in
 
 Route.get("heartbeat", closure: HeartbeatController().index)
 
+Route.get("stencil") { request in
+	return try View(path: "template.stencil", context: [
+		"greeting": "Hello, world!"
+	])
+}
+
+//print what link to visit for default port
 print("Visit http://localhost:8080")
 
 let server = Server()
