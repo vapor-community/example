@@ -19,6 +19,36 @@ To deploy to Ubuntu 14.04 LTS (without Swift installed on remote server).
 3. Copy contents of `Deploy` folder to remote Ubuntu 14.04 server (the folder contains all shared libs needed for running)
 4. Run `./run.sh`
 
+#### Upstart
+
+To start your `Vapor` site automatically when the server is booted, add this file to your server.
+
+`/etc/init/vapor-example.conf`
+
+```conf
+description "Vapor Example"
+
+start on startup
+
+exec /home/<user_name>/vapor-example/.build/release/VaporApp --workDir=/home/<user_name>/vapor-example
+```
+
+You additionally have access to the following commands for starting and stopping your server.
+
+```shell
+sudo stop vapor-example
+sudo start vapor-example
+```
+
+The following script is useful for upgrading your website.
+
+```shell
+git pull
+swift build --configuration release
+sudo stop vapor-example
+sudo start vapor-example
+```
+
 or try it out at Swifton.me
 
 [![Deploy to Swifton.me](https://serve.swifton.me/badge.png)](https://serve.swifton.me/oneclick?repository=https://github.com/tannernelson/vapor-example)
