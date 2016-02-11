@@ -52,3 +52,16 @@ sudo start vapor-example
 or try it out at Swifton.me
 
 [![Deploy to Swifton.me](https://serve.swifton.me/badge.png)](https://serve.swifton.me/oneclick?repository=https://github.com/tannernelson/vapor-example)
+
+### Docker
+You can run this demo application locally in a Linux environment using Docker.
+
+This assumes you already have the [Docker](https://www.docker.com) installed and working on your local machine.
+
+1. Ensure [Docker](https://www.docker.com) is installed on your local machine.
+2. Start the Docker terminal
+3. cd into `vapor-example`
+4. Build the container `docker build -t vapor .`
+5. Run the container `docker run -it -p 8080:8080 vapor`
+5. Configure VirtualBox to [forward ports 8080 to 8080](https://www.virtualbox.org/manual/ch06.html)
+6. Visit http://0.0.0.8080
