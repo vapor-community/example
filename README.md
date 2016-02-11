@@ -56,8 +56,6 @@ or try it out at Swifton.me
 ### Docker
 You can run this demo application locally in a Linux environment using Docker.
 
-This assumes you already have the [Docker](https://www.docker.com) installed and working on your local machine.
-
 1. Ensure [Docker](https://www.docker.com) is installed on your local machine.
 2. Start the Docker terminal
 3. cd into `vapor-example`
