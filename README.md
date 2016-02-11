@@ -62,4 +62,4 @@ You can run this demo application locally in a Linux environment using Docker.
 4. Build the container `docker build -t vapor .`
 5. Run the container `docker run -it -p 8080:8080 vapor`
 5. Configure VirtualBox to [forward ports 8080 to 8080](https://www.virtualbox.org/manual/ch06.html)
-6. Visit http://0.0.0.8080
+6. Visit http://0.0.0.0:8080
