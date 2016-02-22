@@ -1,10 +1,10 @@
 # Vapor Example
 
-Check out the [live demo](http://vapor.tanner.xyz:8080) running on Ubuntu.
+Check out the [live demo](http://vapor.qutheory.io) running on Ubuntu.
 
 Clone this repo and run `swift build` to download the dependencies, then run `.build/debug/VaporApp`
 
-View [Vapor](https://github.com/tannernelson/vapor) for documentation.
+View [Vapor](https://github.com/qutheory/vapor) for documentation.
 
 Swift 2.2 or later is required.
 
