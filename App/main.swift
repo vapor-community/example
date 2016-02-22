@@ -43,10 +43,10 @@ Route.get("session") { request in
 	let response: Response
 	do {
 		let json: [String: Any] = [
-						"session.data": request.session.data,
-						"request.cookies": request.cookies,
-						"instructions": "Refresh to see cookie and session get set."
-				];
+			"session.data": request.session.data,
+			"request.cookies": request.cookies,
+			"instructions": "Refresh to see cookie and session get set."
+		];
 		response = try Response(status: .OK, json: json)
 	} catch {
 		response = Response(error: "Invalid JSON")
