@@ -69,4 +69,5 @@ Route.get("stencil") { request in
 // Print what link to visit for default port
 print("Visit http://localhost:8080")
 
+application.middleware.append(SampleMiddleware())
 application.start(port: 8080)
