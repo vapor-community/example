@@ -1,9 +1,9 @@
 import Vapor
 import VaporStencil
 
-//set the stencil renderer
-//for all .stencil files
-View.renderers[".stencil"] = StencilRenderer()
+let application = Application([
+	VaporStencil.Provider // Adds support for stencil rendering for all .stencil views
+])
 
 Route.get("/") { request in
 	do {
@@ -13,7 +13,7 @@ Route.get("/") { request in
 	}
 }
 
-Route.get("json") { request in 
+Route.get("json") { request in
 	let response: [String: Any] = [
 		"number": 123,
 		"string": "test",
@@ -66,9 +66,7 @@ Route.get("stencil") { request in
 	])
 }
 
-//print what link to visit for default port
+// Print what link to visit for default port
 print("Visit http://localhost:8080")
 
-let server = Server()
-server.run(port: 8080)
-
+application.start(port: 8080)
