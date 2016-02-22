@@ -1,11 +1,9 @@
 import Vapor
 import VaporStencil
 
-let application = Application([
-	VaporStencil.Provider // Adds support for stencil rendering for all .stencil views
-])
+let app = Application()
 
-Route.get("/") { request in
+app.get("/") { request in
 	do {
 		return try View(path: "welcome.html")
 	} catch _ {
@@ -13,7 +11,7 @@ Route.get("/") { request in
 	}
 }
 
-Route.get("json") { request in
+app.get("json") { request in
 	let response: [String: Any] = [
 		"number": 123,
 		"string": "test",
@@ -29,7 +27,7 @@ Route.get("json") { request in
 	return response
 }
 
-Route.any("data/:id") { request in
+app.any("data/:id") { request in
 	let response: [String: Any] = [
 		"request.path": request.path,
 		"request.data": request.data,
@@ -39,7 +37,7 @@ Route.any("data/:id") { request in
 	return response
 }
 
-Route.get("session") { request in
+app.get("session") { request in
 	let response: Response
 	do {
 		let json: [String: Any] = [
@@ -58,9 +56,9 @@ Route.get("session") { request in
 	return response
 }
 
-Route.get("heartbeat", closure: HeartbeatController().index)
+app.get("heartbeat", closure: HeartbeatController().index)
 
-Route.get("stencil") { request in
+app.get("stencil") { request in
 	return try View(path: "template.stencil", context: [
 		"greeting": "Hello, world!"
 	])
@@ -69,5 +67,6 @@ Route.get("stencil") { request in
 // Print what link to visit for default port
 print("Visit http://localhost:8080")
 
-application.middleware.append(SampleMiddleware())
-application.start(port: 8080)
+app.providers.append(VaporStencil.Provider) // Adds support for stencil rendering for all .stencil views)
+app.middleware.append(SampleMiddleware)
+app.start(port: 8080)
