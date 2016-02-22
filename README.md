@@ -2,7 +2,7 @@
 
 Check out the [live demo](http://vapor.qutheory.io) running on Ubuntu.
 
-Clone this repo and run `swift build` to download the dependencies, then run `.build/debug/VaporApp`
+Clone this repo and run `swift build` to download the dependencies, then run `.build/debug/App`
 
 View [Vapor](https://github.com/qutheory/vapor) for documentation.
 
@@ -15,7 +15,7 @@ Works on Ubuntu.
 To deploy to Ubuntu 14.04 LTS (without Swift installed on remote server).
 
 1. Compile program on Ubuntu 14.04 (Swift must be installed on this computer)
-2. Copy program from `.build/[debug,release]/VaporApp` into `Deploy/VaporApp`
+2. Copy program from `.build/[debug,release]/App` into `Deploy/App`
 3. Copy contents of `Deploy` folder to remote Ubuntu 14.04 server (the folder contains all shared libs needed for running)
 4. Run `./run.sh`
 
@@ -30,7 +30,7 @@ description "Vapor Example"
 
 start on startup
 
-exec /home/<user_name>/vapor-example/.build/release/VaporApp --workDir=/home/<user_name>/vapor-example
+exec /home/<user_name>/vapor-example/.build/release/App --workDir=/home/<user_name>/vapor-example
 ```
 
 You additionally have access to the following commands for starting and stopping your server.

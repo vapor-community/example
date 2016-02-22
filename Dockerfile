@@ -30,4 +30,4 @@ RUN swift build
 
 EXPOSE 8080
 
-CMD .build/debug/VaporApp
+CMD .build/debug/App

@@ -1,1 +1,1 @@
-web: VaporApp --port=$PORT
+web: App --port=$PORT
