@@ -56,7 +56,7 @@ app.get("session") { request in
 	return response
 }
 
-app.get("heartbeat", closure: HeartbeatController().index)
+app.get("heartbeat", handler: HeartbeatController().index)
 
 app.get("stencil") { request in
 	return try View(path: "template.stencil", context: [
