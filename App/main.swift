@@ -1,5 +1,5 @@
 import Vapor
-import VaporStencil
+//import VaporStencil
 
 let app = Application()
 
@@ -12,7 +12,7 @@ app.get("/") { request in
 }
 
 app.get("json") { request in
-	let response: [String: Any] = [
+	return Json([
 		"number": 123,
 		"string": "test",
 		"array": [
@@ -22,29 +22,25 @@ app.get("json") { request in
 			"name": "Vapor",
 			"lang": "Swift"
 		]
-	]
-
-	return response
+	])
 }
 
 app.any("data/:id") { request in
-	let response: [String: Any] = [
+	return try Json([
 		"request.path": request.path,
-		"request.data": request.data,
-		"request.parameters": request.parameters,
-	]
-
-	return response
+		"request.data": "\(request.data)",
+		"request.parameters": "\(request.parameters)",
+	])
 }
 
 app.get("session") { request in
 	let response: Response
 	do {
-		let json: [String: Any] = [
-			"session.data": request.session.data,
-			"request.cookies": request.cookies,
+		let json = try Json([
+			"session.data": "\(request.session.data)",
+			"request.cookies": "\(request.cookies)",
 			"instructions": "Refresh to see cookie and session get set."
-		];
+		]);
 		response = try Response(status: .OK, json: json)
 	} catch {
 		response = Response(error: "Invalid JSON")
@@ -67,6 +63,6 @@ app.get("stencil") { request in
 // Print what link to visit for default port
 print("Visit http://localhost:8080")
 
-app.providers.append(VaporStencil.Provider) // Adds support for stencil rendering for all .stencil views)
+//app.providers.append(VaporStencil.Provider) // Adds support for stencil rendering for all .stencil views)
 app.middleware.append(SampleMiddleware)
 app.start(port: 8080)

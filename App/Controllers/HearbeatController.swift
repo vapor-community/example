@@ -1,10 +1,13 @@
 import Vapor
 
 class HeartbeatController: Controller {
+    required init() {
+
+    }
 
 	/// List all resources
 	func index(request: Request) throws -> ResponseConvertible {
-		return ["lub": "dub"]
+		return try Json(["lub": "dub"])
 	}
 
 	/// Create a new instance.
