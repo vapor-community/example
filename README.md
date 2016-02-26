@@ -10,6 +10,11 @@ dependencies, then run `.build/debug/App`.
 Note: the `run` script may contain fixes for bugs in SPM that may prevent you
 from building with `swift build`.
 
+If you are having issues running, try clearing your downloaded files with
+`./clear`. Also, checkout Kylef's
+[swiftenv](https://github.com/kylef/swiftenv) for ensuring you have the latest
+version of Swift installed. If you have `swiftenv`, run `swiftenv install` inside your root folder to
+install the proper version of Swift.
 
 View [Vapor](https://github.com/qutheory/vapor) for documentation.
 
