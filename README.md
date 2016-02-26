@@ -2,7 +2,14 @@
 
 Check out the [live demo](http://vapor.qutheory.io) running on Ubuntu.
 
-Clone this repo and run `swift build` to download the dependencies, then run `.build/debug/App`
+Clone this repo and run `./run` to start your application.
+
+You can also build it manually by running `swift build` to download the
+dependencies, then run `.build/debug/App`. 
+
+Note: the `run` script may contain fixes for bugs in SPM that may prevent you
+from building with `swift build`.
+
 
 View [Vapor](https://github.com/qutheory/vapor) for documentation.
 
