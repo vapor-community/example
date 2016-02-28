@@ -37,7 +37,7 @@ app.get("session") { request in
 	let response: Response
 	do {
 		let json = try Json([
-			"session.data": "\(request.session.data)",
+			"session.data": "\(request.session)",
 			"request.cookies": "\(request.cookies)",
 			"instructions": "Refresh to see cookie and session get set."
 		]);
@@ -46,7 +46,7 @@ app.get("session") { request in
 		response = Response(error: "Invalid JSON")
 	}
 
-	request.session.data["name"] = "Vapor"
+	request.session["name"] = "Vapor"
 	response.cookies["test"] = "123"
 
 	return response
