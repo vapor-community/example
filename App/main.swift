@@ -1,5 +1,5 @@
 import Vapor
-//import VaporStencil
+import VaporStencil
 
 let app = Application()
 
@@ -63,6 +63,6 @@ app.get("stencil") { request in
 // Print what link to visit for default port
 print("Visit http://localhost:8080")
 
-//app.providers.append(VaporStencil.Provider) // Adds support for stencil rendering for all .stencil views)
+app.providers.append(VaporStencil.Provider) // Adds support for stencil rendering for all .stencil views)
 app.middleware.append(SampleMiddleware)
 app.start(port: 8080)
