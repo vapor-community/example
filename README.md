@@ -1,8 +1,14 @@
 # Vapor Example
 
-[![Build Status](https://travis-ci.org/qutheory/vapor-example.svg?branch=master)](https://travis-ci.org/qutheory/vapor-example)
+Fork this example project as a boilerplate for working with Vapor.
 
 Check out the [live demo](http://vapor.qutheory.io) running on Ubuntu.
+
+## Badges
+
+[![Build Status](https://travis-ci.org/qutheory/vapor-example.svg?branch=master)](https://travis-ci.org/qutheory/vapor-example)
+
+## Building
 
 Clone this repo and run `./run` to start your application.
 
@@ -18,13 +24,19 @@ If you are having issues running, try clearing your downloaded files with
 version of Swift installed. If you have `swiftenv`, run `swiftenv install` inside your root folder to
 install the proper version of Swift.
 
+## Documentation
+
 View [Vapor](https://github.com/qutheory/vapor) for documentation.
+
+## Requirements
 
 Swift 2.2 or later is required.
 
-Works on Ubuntu.
+Works on Ubuntu, Docker, Heroku, OS X
 
 ### Deploying
+
+Check the [Vapor](https://github.com/qutheory/vapor) documentation for more in-depth deployment instructions.
 
 To deploy to Ubuntu 14.04 LTS (without Swift installed on remote server).
 
@@ -63,11 +75,11 @@ sudo stop vapor-example
 sudo start vapor-example
 ```
 
-or try it out at Swifton.me
+#### Heroku / Swifton.me
 
 [![Deploy to Swifton.me](https://serve.swifton.me/badge.png)](https://serve.swifton.me/oneclick?repository=https://github.com/tannernelson/vapor-example)
 
-### Docker
+#### Docker
 You can run this demo application locally in a Linux environment using Docker.
 
 1. Ensure [Docker](https://www.docker.com) is installed on your local machine.
