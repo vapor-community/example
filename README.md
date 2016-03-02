@@ -6,7 +6,7 @@ Check out the [live demo](http://vapor.qutheory.io) running on Ubuntu.
 
 ## Badges
 
-[![Build Status](https://travis-ci.org/qutheory/vapor-example.svg?branch=master?style=flat-square)](https://travis-ci.org/qutheory/vapor-example)
+[![Build Status](https://travis-ci.org/qutheory/vapor-example.svg?branch=master&style=flat-square)](https://travis-ci.org/qutheory/vapor-example)
 [![PRs Welcome](https://img.shields.io/badge/prs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![Slack Status](http://slack.tanner.xyz:8085/badge.svg?style=flat-square)](http://slack.tanner.xyz:8085)
 
