@@ -6,7 +6,19 @@ Check out the [live demo](http://vapor.qutheory.io) running on Ubuntu.
 
 ## Badges
 
-[![Build Status](https://travis-ci.org/qutheory/vapor-example.svg?branch=master)](https://travis-ci.org/qutheory/vapor-example)
+[![Build Status](https://travis-ci.org/qutheory/vapor-example.svg?branch=master)](https://travis-ci.org/qutheory/vapor-example?style=flat-square)
+[![PRs Welcome](https://img.shields.io/badge/prs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+[![Slack Status](http://slack.tanner.xyz:8085/badge.svg?style=flat-square)](http://slack.tanner.xyz:8085)
+
+## Documentation
+
+View [Vapor](https://github.com/qutheory/vapor) for documentation.
+
+## Requirements
+
+Swift 2.2 or later is required.
+
+Works on Ubuntu, Docker, Heroku, OS X
 
 ## Building
 
@@ -23,16 +35,6 @@ If you are having issues running, try clearing your downloaded files with
 [swiftenv](https://github.com/kylef/swiftenv) for ensuring you have the latest
 version of Swift installed. If you have `swiftenv`, run `swiftenv install` inside your root folder to
 install the proper version of Swift.
-
-## Documentation
-
-View [Vapor](https://github.com/qutheory/vapor) for documentation.
-
-## Requirements
-
-Swift 2.2 or later is required.
-
-Works on Ubuntu, Docker, Heroku, OS X
 
 ### Deploying
 
