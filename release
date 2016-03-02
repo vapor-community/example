@@ -1,0 +1,8 @@
+#!/bin/sh
+
+echo "Downloading dependencies..."
+swift build &>/dev/null
+echo "Fixing SPM bug..."
+rm -rf Packages/*/Tests
+echo "Building..."
+swift build --configuration release
