@@ -1,5 +1,7 @@
 # Vapor Example
 
+[![Build Status](https://travis-ci.org/qutheory/vapor-example.svg?branch=master)](https://travis-ci.org/qutheory/vapor-example)
+
 Check out the [live demo](http://vapor.qutheory.io) running on Ubuntu.
 
 Clone this repo and run `./run` to start your application.
