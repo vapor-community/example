@@ -6,7 +6,7 @@ Check out the [live demo](http://vapor.qutheory.io) running on Ubuntu.
 
 ## Badges
 
-[![Build Status](https://travis-ci.org/qutheory/vapor-example.svg?branch=master)](https://travis-ci.org/qutheory/vapor-example?style=flat-square)
+[![Build Status](https://travis-ci.org/qutheory/vapor-example.svg?branch=master?style=flat-square)](https://travis-ci.org/qutheory/vapor-example)
 [![PRs Welcome](https://img.shields.io/badge/prs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![Slack Status](http://slack.tanner.xyz:8085/badge.svg?style=flat-square)](http://slack.tanner.xyz:8085)
 
@@ -36,7 +36,7 @@ If you are having issues running, try clearing your downloaded files with
 version of Swift installed. If you have `swiftenv`, run `swiftenv install` inside your root folder to
 install the proper version of Swift.
 
-### Deploying
+## Deploying
 
 Check the [Vapor](https://github.com/qutheory/vapor) documentation for more in-depth deployment instructions.
 
@@ -47,7 +47,7 @@ To deploy to Ubuntu 14.04 LTS (without Swift installed on remote server).
 3. Copy contents of `Deploy` folder to remote Ubuntu 14.04 server (the folder contains all shared libs needed for running)
 4. Run `./run.sh`
 
-#### Upstart
+### Upstart
 
 To start your `Vapor` site automatically when the server is booted, add this file to your server.
 
@@ -77,11 +77,11 @@ sudo stop vapor-example
 sudo start vapor-example
 ```
 
-#### Heroku / Swifton.me
+### Heroku / Swifton.me
 
 [![Deploy to Swifton.me](https://serve.swifton.me/badge.png)](https://serve.swifton.me/oneclick?repository=https://github.com/tannernelson/vapor-example)
 
-#### Docker
+### Docker
 You can run this demo application locally in a Linux environment using Docker.
 
 1. Ensure [Docker](https://www.docker.com) is installed on your local machine.
