@@ -105,7 +105,7 @@ Edit the config below to match your environment and place it in `/etc/supervisor
 
 ```shell
 [program:your-app]
-command=/path/to/app/.build/release/App serve --port=8080
+command=/path/to/app/.build/release/App serve --ip=127.0.0.1 --port=8080
 directory=/path/to/app
 user=www-data
 stdout_logfile=/var/log/supervisor/%(program_name)-stdout.log
@@ -121,7 +121,7 @@ supervisorctl start your-app # `add` may have auto-started, so disregard an “a
 
 #### Nginx
 
-With the app now running via Supervisor, you can use this sample nginx config to proxy it throuhg Nginx:
+With the app now running via Supervisor, you can use this sample nginx config to proxy it through Nginx:
 
 ```nginx
 server {
