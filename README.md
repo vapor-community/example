@@ -90,3 +90,57 @@ You can run this demo application locally in a Linux environment using Docker.
 5. Run the container `docker run -it -p 8080:8080 vapor`
 5. Configure VirtualBox to [forward ports 8080 to 8080](https://www.virtualbox.org/manual/ch06.html)
 6. Visit http://0.0.0.0:8080
+
+### Nginx / Supervisor
+
+You can also run your Vapor app through Nginx.  It’s recommended you use [Supervisor](http://supervisord.org) to run the app instance to protect against crashes and ensure it’s always running.
+
+#### Supervisor
+
+To setup Vapor running through Supervisor, follow these steps:
+
+`apt-get install -y supervisor`
+
+Edit the config below to match your environment and place it in `/etc/supervisor/conf.d/your-app.conf`:
+
+```shell
+[program:your-app]
+command=/path/to/app/.build/release/App serve --port=8080
+directory=/path/to/app
+user=www-data
+stdout_logfile=/var/log/supervisor/%(program_name)-stdout.log
+stderr_logfile=/var/log/supervisor/%(program_name)-stderr.log
+```
+
+Now register the app with Supervisor and start it up:
+```shell
+supervisorctl reread
+supervisorctl add your-app
+supervisorctl start your-app # `add` may have auto-started, so disregard an “already started” error here
+```
+
+#### Nginx
+
+With the app now running via Supervisor, you can use this sample nginx config to proxy it throuhg Nginx:
+
+```nginx
+server {
+	server_name your.host;
+	listen 80;
+
+	root /path/to/app/Public;
+
+	# Serve all public/static files via nginx and then fallback to Vapor for the rest
+	try_files $uri @proxy;
+
+	location @proxy {
+		# Make sure the port here matches the port in your Supervisor config
+		proxy_pass http://127.0.0.1:8080;
+		proxy_set_header Host $host;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_connect_timeout 3s;
+		proxy_read_timeout 10s;
+	}
+}
+```
