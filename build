@@ -1,7 +1,10 @@
-#!/bin/sh
+#!/usr/bin/env bash
+
+set -e
+set -o pipefail
 
 echo "Downloading dependencies..."
-swift build
+swift build --fetch
 echo "Fixing SPM bug..."
 rm -rf Packages/*/Tests
 echo "Building..."
