@@ -2,7 +2,7 @@ import Vapor
 
 class SampleMiddleware: Middleware {
 
-	class func handle(handler: Request.Handler) -> Request.Handler {
+	class func handle(handler: Request.Handler, for application: Application) -> Request.Handler {
 		return { request in
 			// You can manipulate the request before calling the handler
 			// and abort early if necessary, a good injection point for
