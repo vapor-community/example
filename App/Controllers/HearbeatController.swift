@@ -1,6 +1,6 @@
 import Vapor
 
-class HeartbeatController: Controller {
+class HeartbeatController: ResourceController, DefaultInitializable {
     required init() {
 
     }
