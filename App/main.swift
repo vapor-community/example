@@ -4,7 +4,7 @@ let app = Application()
 
 app.get("/") { request in
 	do {
-		return try View(path: "welcome.html")
+		return try app.view("welcome.html")
 	} catch _ {
 		return "Something went wrong."
 	}
@@ -25,7 +25,7 @@ app.get("json") { request in
 }
 
 app.any("data/:id") { request in
-	return try Json([
+	return Json([
 		"request.path": request.path,
 		"request.data": "\(request.data)",
 		"request.parameters": "\(request.parameters)",
@@ -34,16 +34,12 @@ app.any("data/:id") { request in
 
 app.get("session") { request in
 	let response: Response
-	do {
-		let json = try Json([
-			"session.data": "\(request.session)",
-			"request.cookies": "\(request.cookies)",
-			"instructions": "Refresh to see cookie and session get set."
-		]);
-		response = try Response(status: .OK, json: json)
-	} catch {
-		response = Response(error: "Invalid JSON")
-	}
+	let json = Json([
+		"session.data": "\(request.session)",
+		"request.cookies": "\(request.cookies)",
+		"instructions": "Refresh to see cookie and session get set."
+	]);
+	response = Response(status: .OK, json: json)
 
 	request.session?["name"] = "Vapor"
 	response.cookies["test"] = "123"
@@ -54,7 +50,7 @@ app.get("session") { request in
 app.get("heartbeat", handler: HeartbeatController().index)
 
 app.get("stencil") { request in
-	return try View(path: "template.stencil", context: [
+	return try app.view("template.stencil", context: [
 		"greeting": "Hello, world!"
 	])
 }

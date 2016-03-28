@@ -1,33 +1,15 @@
 import Vapor
 
 class HeartbeatController: ResourceController, DefaultInitializable {
-    required init() {
-
-    }
+    required init() { }
 
 	/// List all resources
-	func index(request: Request) throws -> ResponseConvertible {
-		return try Json(["lub": "dub"])
+	func index(request: Request) throws -> ResponseRepresentable {
+		return Json(["lub": "dub"])
 	}
 
-	/// Create a new instance.
-    func store(request: Request) throws -> ResponseConvertible {
-        return ""
+     /// Delete an instance.
+    func destroy(request: Request, item: String) throws -> ResponseRepresentable {
+        throw Abort.NotFound
     }
-
-    /// Show an instance.
-    func show(request: Request) throws -> ResponseConvertible {
-        return ""
-    }
-
-    /// Update an instance.
-    func update(request: Request) throws -> ResponseConvertible {
-        return ""
-    }
-
-    /// Delete an instance.
-    func destroy(request: Request) throws -> ResponseConvertible {
-        return ""
-    }
-
 }
