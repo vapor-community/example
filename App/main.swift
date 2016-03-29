@@ -32,6 +32,10 @@ app.any("data/:id") { request in
 	])
 }
 
+app.get("plaintext") { request in
+	return "Hello, World!"
+}
+
 app.get("session") { request in
 	let response: Response
 	let json = Json([
