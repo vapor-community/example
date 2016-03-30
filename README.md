@@ -15,36 +15,49 @@ View [Vapor](https://github.com/qutheory/vapor) for documentation.
 
 ## Requirements
 
-Swift 2.2 or later is required.
+Swift 2.2 or later is required (3.0 or later for certain features).
 
 Works on Ubuntu, Docker, Heroku, OS X
 
 ## Building
 
-Clone this repo and run `./run` to start your application.
+### Swift 3.0
 
-You can also build it manually by running `swift build` to download the
-dependencies, then run `.build/debug/App`. 
+Check out Kylef's [swiftenv](https://github.com/kylef/swiftenv) for ensuring you have the latest
+version of Swift installed. This project contains a `.swift-version` file which will tell `swiftenv` which version of Swift to build with automatically. 
 
-Note: the `run` script may contain fixes for bugs in SPM that may prevent you
-from building with `swift build`.
+If you dont want to use `swiftenv`, visit [Swift.org](http://swift.org) to learn more about installing development snapshots on your system.
 
-If you are having issues running, try clearing your downloaded files with
-`./clear`. Also, checkout Kylef's
-[swiftenv](https://github.com/kylef/swiftenv) for ensuring you have the latest
-version of Swift installed. If you have `swiftenv`, run `swiftenv install` inside your root folder to
-install the proper version of Swift.
+### Vapor CLI
+
+The Vapor Command Line Interface makes it easy to build and run Vapor projects. Install it by running 
+
+```sh
+brew tap qutheory/tap
+brew install vapor
+vapor help
+```
+
+or on Linux
+
+```sh
+git clone https://github.com/qutheory/vapor.git
+cd vapor
+sudo cp vapor /usr/local/bin/vapor
+vapor help
+```
+
+### Compiling
+
+If you have the Vapor CLI, use `vapor new <project-name` to create your new application.
+
+Then run `vapor build` and `vapor run`.
+
+Otherwise, clone this repo and run `swift build` to compile your application, then run `.build/debug/App`. 
 
 ## Deploying
 
 Check the [Vapor](https://github.com/qutheory/vapor) documentation for more in-depth deployment instructions.
-
-To deploy to Ubuntu 14.04 LTS (without Swift installed on remote server).
-
-1. Compile program on Ubuntu 14.04 (Swift must be installed on this computer)
-2. Copy program from `.build/[debug,release]/App` into `Deploy/App`
-3. Copy contents of `Deploy` folder to remote Ubuntu 14.04 server (the folder contains all shared libs needed for running)
-4. Run `./run.sh`
 
 ### Upstart
 
