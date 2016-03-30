@@ -21,6 +21,10 @@ Works on Ubuntu, Docker, Heroku, OS X
 
 ## Building
 
+### Swift 2.2
+
+Visit [Getting Started](https://github.com/qutheory/vapor/wiki/Setup) in the Vapor Wiki for more details about using Swift 2.2.
+
 ### Swift 3.0
 
 Check out Kylef's [swiftenv](https://github.com/kylef/swiftenv) for ensuring you have the latest
