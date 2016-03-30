@@ -45,16 +45,52 @@ app.get("json") { request in
 }
 
 /**
-	This route shows the various ways to
-	access request data. 
+	This route shows the various ways to access 
+	request data with a manual (not type safe) route.
 
-	Visit "data/<any-integer>" to view the output.
+	Visit "data/<some-string>" to view the output.
 */
-app.any("data", Int.self) { request, id in
+app.any("data/:id") { request in
 	return Json([
 		"request.path": request.path,
 		"request.data": "\(request.data)",
 		"request.parameters": "\(request.parameters)",
+	])
+}
+
+/**
+	Here's an example of using type-safe routing to ensure 
+	only requests to "posts/<some-integer>" will be handled.
+
+	String is the most general and will match any request
+	to "posts/<some-string>". To make your data structure
+	work with type-safe routing, make it StringInitializable.
+
+	The User model included in this example is StringInitializable.
+*/
+app.get("posts", Int.self) { request, postId in 
+	return "Requesting post with ID \(postId)"
+}
+
+/**
+	This will set up the appropriate GET, PUT, and POST
+	routes for basic CRUD operations. Check out the
+	UserController in App/Controllers to see more.
+
+	Controllers are also type-safe, with their types being
+	defined by which StringInitializable class they choose
+	to receive as parameters to their functions.
+*/
+app.resource("users", controller: UserController.self)
+
+/**
+	VaporZewoMustache hooks into Vapor's view class to
+	allow rendering of Mustache templates. You can 
+	even reference included files setup through the provider.
+*/
+app.get("mustache") { request in
+	return try app.view("template.mustache", context: [
+		"greeting": "Hello, world!"
 	])
 }
 
@@ -85,39 +121,6 @@ app.get("session") { request in
 
 	return response
 }
-
-/**
-	Here's an example of using String instead
-	of Int to make a type-safe request handler.
-
-	String is the most general and will match any request
-	to "posts/<some-string>". To make your data structure
-	work with type-safe routing, make it StringInitializable.
-
-	The User model included in this example is StringInitializable.
-*/
-app.get("posts", String.self) { request, postName in 
-	return "Requesting post named \(postName)"
-}
-
-/**
-	This will set up the appropriate GET, PUT, and POST
-	routes for basic CRUD operations. Check out the
-	UserController in App/Controllers to see more.
-*/
-app.resource("users", controller: UserController.self)
-
-/**
-	VaporZewoMustache hooks into Vapor's view class to
-	allow rendering of Mustache templates. You can 
-	even reference included files setup through the provider.
-*/
-app.get("mustache") { request in
-	return try app.view("template.mustache", context: [
-		"greeting": "Hello, world!"
-	])
-}
-
 
 //Add includeable files to the Mustache provider
 VaporZewoMustache.Provider.includeFiles["header"] = "Includes/header.mustache"
