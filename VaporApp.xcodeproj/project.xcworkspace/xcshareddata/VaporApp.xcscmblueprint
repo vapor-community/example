@@ -1,0 +1,58 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "AA4F32B25933CAAA5857EA2080FE655A951C6324",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "23A93BD79D6F4162360D9B57530A0BAC7A3E8EEA" : 0,
+    "704B817219E4CBC31AA92368EF54A4E2835A8C3D" : 0,
+    "10A2CB6C4392F0E306FF8D509BE5E88232276EA4" : 0,
+    "AA4F32B25933CAAA5857EA2080FE655A951C6324" : 0,
+    "901D39F10963DCBC990E02C949E08901C0DDB8E3" : 0,
+    "4F6C23CD1048E3CB9DF672911A1E48E51B1B842D" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "E77F5B70-DABA-4B20-B852-6B15DEEDADCF",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "23A93BD79D6F4162360D9B57530A0BAC7A3E8EEA" : "example\/Packages\/Strand-1.1.0\/",
+    "704B817219E4CBC31AA92368EF54A4E2835A8C3D" : "example\/Packages\/OperatingSystem-0.4.2\/",
+    "10A2CB6C4392F0E306FF8D509BE5E88232276EA4" : "example\/Packages\/String-0.4.3\/",
+    "AA4F32B25933CAAA5857EA2080FE655A951C6324" : "example\/",
+    "901D39F10963DCBC990E02C949E08901C0DDB8E3" : "example\/Packages\/InterchangeData-0.4.2\/",
+    "4F6C23CD1048E3CB9DF672911A1E48E51B1B842D" : "example\/Packages\/VaporZewoMustache-0.1.1\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "VaporApp",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "VaporApp.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Zewo\/String.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "10A2CB6C4392F0E306FF8D509BE5E88232276EA4"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ketzusaka\/Strand",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "23A93BD79D6F4162360D9B57530A0BAC7A3E8EEA"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/qutheory\/vapor-zewo-mustache.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4F6C23CD1048E3CB9DF672911A1E48E51B1B842D"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Zewo\/OS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "704B817219E4CBC31AA92368EF54A4E2835A8C3D"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Zewo\/InterchangeData.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "901D39F10963DCBC990E02C949E08901C0DDB8E3"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:qutheory\/vapor-example.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "AA4F32B25933CAAA5857EA2080FE655A951C6324"
+    }
+  ]
+}
