@@ -34,7 +34,7 @@ If you dont want to use `swiftenv`, visit [Swift.org](http://swift.org) to learn
 
 ### Vapor CLI
 
-The Vapor Command Line Interface makes it easy to build and run Vapor projects. Install it by running 
+The Vapor Command Line Interface makes it easy to build and run Vapor projects. Install it on Mac by running 
 
 ```sh
 brew tap qutheory/tap
@@ -42,18 +42,20 @@ brew install vapor
 vapor help
 ```
 
-or on Linux
+or on Linux with
 
 ```sh
 git clone https://github.com/qutheory/vapor.git
 cd vapor
 sudo cp vapor /usr/local/bin/vapor
+cd ../
+rm -rf vapor
 vapor help
 ```
 
 ### Compiling
 
-If you have the Vapor CLI, use `vapor new <project-name` to create your new application.
+If you have the Vapor CLI, use `vapor new <project-name>` to create your new application.
 
 Then run `vapor build` and `vapor run`.
 
