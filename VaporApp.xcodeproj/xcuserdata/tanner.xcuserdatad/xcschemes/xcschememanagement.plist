@@ -46,12 +46,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>______Target_CryptoEssentials</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>______Target_Data</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>______Target_Generator</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>______Target_HMAC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,6 +92,21 @@
 			<true/>
 		</dict>
 		<key>______Target_OperatingSystem</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>______Target_S4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>______Target_S4TestSuite</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>______Target_SHA2</key>
 		<dict>
 			<key>primary</key>
 			<true/>

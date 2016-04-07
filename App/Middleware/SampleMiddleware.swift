@@ -2,21 +2,23 @@ import Vapor
 
 class SampleMiddleware: Middleware {
 
-	class func handle(handler: Request.Handler, for application: Application) -> Request.Handler {
-		return { request in
-			// You can manipulate the request before calling the handler
-			// and abort early if necessary, a good injection point for
-			// handling auth.
+	func respond(request: Request, chain: Responder) throws -> Response {
+        // You can manipulate the request before calling the handler
+        // and abort early if necessary, a good injection point for
+        // handling auth.
 
-			// return Response(status: .Forbidden, text: "Permission denied")
+        // return Response(status: .Forbidden, text: "Permission denied")
 
-			let response = try handler(request: request)
+        let response = try chain.respond(request)
 
-			// You can also manipulate the response to add headers
-			// cookies, etc.
+        // You can also manipulate the response to add headers
+        // cookies, etc.
 
-			return response
-		}
+        return response
+
+        // Vapor Middleware is based on S4 Middleware.
+        // This means you can share it with any other project
+        // that uses S4 Middleware. 
 	}
 
 }

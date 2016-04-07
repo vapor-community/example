@@ -52,7 +52,7 @@ app.get("json") { request in
 */
 app.any("data/:id") { request in
 	return Json([
-		"request.path": request.path,
+		"request.path": request.uri.path ?? "",
 		"request.data": "\(request.data)",
 		"request.parameters": "\(request.parameters)",
 	])
@@ -114,7 +114,7 @@ app.get("session") { request in
 		"request.cookies": "\(request.cookies)",
 		"instructions": "Refresh to see cookie and session get set."
 	])
-	let response = Response(status: .OK, json: json)
+	var response = Response(status: .ok, json: json)
 
 	request.session?["name"] = "Vapor"
 	response.cookies["test"] = "123"
@@ -122,14 +122,13 @@ app.get("session") { request in
 	return response
 }
 
-//Add includeable files to the Mustache provider
-VaporZewoMustache.Provider.includeFiles["header"] = "Includes/header.mustache"
-
 /**
 	Appending a provider allows it to boot
 	and initialize itself as a dependency.
 */
-app.providers.append(VaporZewoMustache.Provider)
+app.providers.append(VaporZewoMustache.Provider(withIncludes: [
+    "header": "Includes/header.mustache"
+]))
 
 /**
 	Middleware is a great place to filter 
@@ -142,7 +141,7 @@ app.providers.append(VaporZewoMustache.Provider)
 		app.get() { ... }
 	}`
 */
-app.middleware.append(SampleMiddleware)
+app.middleware.append(SampleMiddleware())
 
 // Print what link to visit for default port
 print("Visit http://localhost:8080")
