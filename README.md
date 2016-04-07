@@ -61,6 +61,12 @@ Then run `vapor build` and `vapor run`.
 
 Otherwise, clone this repo and run `swift build` to compile your application, then run `.build/debug/App`. 
 
+### Xcode 7.3
+
+Open the `VaporApp.xcodeproj` with Xcode 7.3 and make sure Xcode > Toolchains is set to `swift-DEVELOPMENT-SNAPSHOT-2016-03-24-a.xctoolchain` or later. 
+
+![Xcode](https://cloud.githubusercontent.com/assets/1342803/14158906/d53931be-f6a0-11e5-8282-02ab8cda31a9.png)
+
 ## Deploying
 
 Check the [Vapor](https://github.com/qutheory/vapor) documentation for more in-depth deployment instructions.
