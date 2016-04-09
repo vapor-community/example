@@ -2,7 +2,7 @@
 
 Fork this example project as a boilerplate for working with Vapor.
 
-Check out the [live demo](http://vapor.qutheory.io) running on Ubuntu.
+Check out the [live demo](http://example.qutheory.io) running on Ubuntu.
 
 ## Badges
 [![Build Status](https://img.shields.io/travis/qutheory/vapor-example.svg?style=flat-square)](https://travis-ci.org/qutheory/vapor-example)
