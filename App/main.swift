@@ -50,7 +50,7 @@ app.get("json") { request in
 
 	Visit "data/<some-string>" to view the output.
 */
-app.any("data/:id") { request in
+app.any(path: "data/:id") { request in
 	return Json([
 		"request.path": request.uri.path ?? "",
 		"request.data": "\(request.data)",
