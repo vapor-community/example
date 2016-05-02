@@ -1,6 +1,8 @@
 import Vapor
 
 class UserController: Controller {
+	typealias Item = User
+	
     required init(application: Application) {
         Log.info("User controller created")
     }
