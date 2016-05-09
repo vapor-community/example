@@ -9,12 +9,22 @@
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
+		<key>Development.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>Generator.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>1</integer>
+		</dict>
+		<key>Performance.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
 		</dict>
 		<key>VaporApp.xcscheme_^#shared#^_</key>
 		<dict>
@@ -56,6 +66,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>______Target_Development</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>______Target_Generator</key>
 		<dict>
 			<key>primary</key>
@@ -92,6 +107,11 @@
 			<true/>
 		</dict>
 		<key>______Target_OperatingSystem</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>______Target_Performance</key>
 		<dict>
 			<key>primary</key>
 			<true/>
