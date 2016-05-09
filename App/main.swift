@@ -1,5 +1,5 @@
 import Vapor
-import VaporZewoMustache
+//import VaporZewoMustache
 
 let app = Application()
 
@@ -31,7 +31,10 @@ app.get("/") { request in
 	were a native JSON data type.
 */
 app.get("json") { request in
-	return Json([
+    return Json([
+        "string": "test"
+    ])
+	/*return Json([
 		"number": 123,
 		"string": "test",
 		"array": [
@@ -41,7 +44,7 @@ app.get("json") { request in
 			"name": "Vapor",
 			"lang": "Swift"
 		]
-	])
+	])*/
 }
 
 /**
@@ -50,7 +53,7 @@ app.get("json") { request in
 
 	Visit "data/<some-string>" to view the output.
 */
-app.any("data/:id") { request in
+app.any(path: "data/:id") { request in
 	return Json([
 		"request.path": request.uri.path ?? "",
 		"request.data": "\(request.data)",
@@ -122,6 +125,7 @@ app.get("session") { request in
 	return response
 }
 
+/* VaporZewoMustache awaiting upgrade.
 /**
 	Appending a provider allows it to boot
 	and initialize itself as a dependency.
@@ -129,6 +133,7 @@ app.get("session") { request in
 app.providers.append(VaporZewoMustache.Provider(withIncludes: [
     "header": "Includes/header.mustache"
 ]))
+*/
 
 /**
 	Middleware is a great place to filter 

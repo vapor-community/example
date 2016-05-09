@@ -101,6 +101,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>______Target_MediaType</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>______Target_Mustache</key>
 		<dict>
 			<key>primary</key>
@@ -137,6 +142,11 @@
 			<true/>
 		</dict>
 		<key>______Target_String</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>______Target_StructuredData</key>
 		<dict>
 			<key>primary</key>
 			<true/>
