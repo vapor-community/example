@@ -1,5 +1,4 @@
 import Vapor
-//import VaporZewoMustache
 
 let app = Application()
 
@@ -84,14 +83,51 @@ app.get("posts", Int.self) { request, postId in
 app.resource("users", controller: UserController.self)
 
 /**
-	VaporZewoMustache hooks into Vapor's view class to
-	allow rendering of Mustache templates. You can 
-	even reference included files setup through the provider.
+    A custom validator definining what
+    constitutes a valid name. Here it is 
+    defined as an alphanumeric string that
+    is between 5 and 20 characters.
 */
-app.get("mustache") { request in
-	return try app.view("template.mustache", context: [
-		"greeting": "Hello, world!"
-	])
+class Name: ValidationSuite {
+    static func validate(input value: String) throws {
+        let evaluation = OnlyAlphanumeric.self
+            && Count.min(5)
+            && Count.max(20)
+
+        try evaluation.validate(input: value)
+    }
+}
+
+/**
+    By using `Valid<>` properties, the
+    employee class ensures only valid
+    data will be stored.
+*/
+class Employee {
+    var email: Valid<Email>
+    var name: Valid<Name>
+
+    init(request: Request) throws {
+        email = try request.data["email"].validated()
+        name = try request.data["name"].validated()
+    }
+}
+
+/**
+    Allows any instance of employee
+    to be returned as Json
+*/
+extension Employee: JsonRepresentable {
+    func makeJson() -> Json {
+        return Json([
+            "email": email.value,
+            "name": name.value
+        ])
+    }
+}
+
+app.any(path: "validation") { request in
+    return try Employee(request: request)
 }
 
 /**
@@ -121,16 +157,6 @@ app.get("session") { request in
 
 	return response
 }
-
-/* VaporZewoMustache awaiting upgrade.
-/**
-	Appending a provider allows it to boot
-	and initialize itself as a dependency.
-*/
-app.providers.append(VaporZewoMustache.Provider(withIncludes: [
-    "header": "Includes/header.mustache"
-]))
-*/
 
 /**
 	Middleware is a great place to filter 
