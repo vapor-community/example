@@ -32,19 +32,16 @@ app.get("/") { request in
 */
 app.get("json") { request in
     return Json([
-        "string": "test"
+        "number": 123,
+        "string": "test",
+        "array": Json([
+            0, 1, 2, 3
+        ]),
+        "dict": Json([
+            "name": "Vapor",
+            "lang": "Swift"
+        ])
     ])
-	/*return Json([
-		"number": 123,
-		"string": "test",
-		"array": [
-			0, 1, 2, 3
-		],
-		"dict": [
-			"name": "Vapor",
-			"lang": "Swift"
-		]
-	])*/
 }
 
 /**
