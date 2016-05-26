@@ -48,7 +48,9 @@ Otherwise, clone this repo and run `swift build` to compile your application, th
 
 Run `vapor xcode` which will create the Xcode Project and open Xcode 7.3. Make sure Xcode > Toolchains is set to `swift-DEVELOPMENT-SNAPSHOT-2016-05-09-a.xctoolchain` or later. 
 
-![Xcode](https://cloud.githubusercontent.com/assets/1342803/14158906/d53931be-f6a0-11e5-8282-02ab8cda31a9.png)
+![Xcode](https://cloud.githubusercontent.com/assets/1342803/15592631/3e740df8-2373-11e6-8624-3c89260322aa.png)
+
+Make sure your Xcode project is set to run with the working directory set to the root of the project. You can do this by going to Schemes (App or VaporApp) > Edit Scheme > Run > Options > Working Directory > Use Custom Working Directory.
 
 ## Deploying
 
