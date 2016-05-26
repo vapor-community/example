@@ -34,24 +34,7 @@ If you dont want to use `swiftenv`, visit [Swift.org](http://swift.org) to learn
 
 ### Vapor CLI
 
-The Vapor Command Line Interface makes it easy to build and run Vapor projects. Install it on Mac by running 
-
-```sh
-brew tap qutheory/tap
-brew install vapor
-vapor help
-```
-
-or on Linux with
-
-```sh
-git clone https://github.com/qutheory/vapor.git
-cd vapor
-sudo cp vapor /usr/local/bin/vapor
-cd ../
-rm -rf vapor
-vapor help
-```
+The Vapor Command Line Interface makes it easy to build and run Vapor projects. Install it [here](https://github.com/qutheory/vapor-cli)
 
 ### Compiling
 
@@ -101,18 +84,23 @@ sudo stop vapor-example
 sudo start vapor-example
 ```
 
-### Heroku / Swifton.me
+### Heroku
 
-[![Deploy to Swifton.me](https://serve.swifton.me/badge.png)](https://serve.swifton.me/oneclick?repository=https://github.com/tannernelson/vapor-example)
+Use the `vapor heroku` commands in the CLI to push to Heroku.
 
 ### Docker
+
 You can run this demo application locally in a Linux environment using Docker.
+
+Make sure you have installed the Vapor CLI.
 
 1. Ensure [Docker](https://www.docker.com) is installed on your local machine.
 2. Start the Docker terminal
 3. cd into `vapor-example`
-4. Build the container `docker build -t vapor .`
-5. Run the container `docker run -it -p 8080:8080 vapor`
+4. Create the Dockerfile `vapor docker init`
+5. Build the container `vapor docker build`
+6. Run the container `vapor docker run`
+7. Optionally enter the container `vapor docker enter`
 5. Configure VirtualBox to [forward ports 8080 to 8080](https://www.virtualbox.org/manual/ch06.html)
 6. Visit http://0.0.0.0:8080
 

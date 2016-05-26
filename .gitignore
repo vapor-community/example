@@ -1,3 +1,5 @@
 Packages
 .build
 xcuserdata
+*.xcodeproj
+
