@@ -183,10 +183,12 @@ app.get("session") { request in
 */
 app.middleware.append(SampleMiddleware())
 
-
  /**        
     Appending a provider allows it to boot      
     and initialize itself as a dependency.      
+
+    Includes are relative to the Views (`Resources/Views`)
+    directory by default.
  */     
  app.providers.append(VaporZewoMustache.Provider(withIncludes: [        
      "header": "Includes/header.mustache"       
