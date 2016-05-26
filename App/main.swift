@@ -1,7 +1,20 @@
 import Vapor
-import VaporZewoMustache
+import VaporMustache
 
 let app = Application()
+
+/**
+    Vapor configuration files are located
+    in the root directory of the project
+    under `/Config`.
+
+    `.json` files in subfolders of Config
+    override other JSON files based on the
+    current server environment.
+
+    Read the docs to learn more
+*/
+app.hash.key = app.config["app", "key"].string ?? ""
 
 /**
     This first route will return the welcome.html
@@ -20,9 +33,9 @@ app.get("/") { request in
 /**
     Return JSON requests easy by wrapping
     any JSON data type (String, Int, Dict, etc)
-    in Json() and returning it.
+    in JSON() and returning it.
 
-    Types can be made convertible to Json by 
+    Types can be made convertible to JSON by 
     conforming to JsonRepresentable. The User
     model included in this example demonstrates this.
 
@@ -31,13 +44,13 @@ app.get("/") { request in
     were a native JSON data type.
 */
 app.get("json") { request in
-    return Json([
+    return JSON([
         "number": 123,
         "string": "test",
-        "array": Json([
+        "array": JSON([
             0, 1, 2, 3
         ]),
-        "dict": Json([
+        "dict": JSON([
             "name": "Vapor",
             "lang": "Swift"
         ])
@@ -45,16 +58,30 @@ app.get("json") { request in
 }
 
 /**
-    This route shows the various ways to access 
-    request data with a manual (not type safe) route.
+    This route shows how to access request
+    data. POST to this route with either JSON
+    or Form URL-Encoded data with a structure
+    like:
 
-    Visit "data/<some-string>" to view the output.
+    {
+        "users" [
+            {
+                "name": "Test"
+            }
+        ]
+    }
+
+    You can also access different types of
+    request.data manually:
+
+    - Query: request.data.query
+    - JSON: request.data.json
+    - Form URL-Encoded: request.data.formEncoded
+    - MultiPart: request.data.multipart
 */
-app.any("data/:id") { request in
-    return Json([
-        "request.path": request.uri.path ?? "",
-        "request.data": "\(request.data)",
-        "request.parameters": "\(request.parameters)",
+app.any("data") { request in
+    return JSON([
+        "name": request.data["users", 0, "name"].string ?? "no name"
     ])
 }
 
@@ -129,9 +156,9 @@ class Employee {
     Allows any instance of employee
     to be returned as Json
 */
-extension Employee: JsonRepresentable {
-    func makeJson() -> Json {
-        return Json([
+extension Employee: JSONRepresentable {
+    func makeJson() -> JSON {
+        return JSON([
             "email": email.value,
             "name": name.value
         ])
@@ -157,7 +184,7 @@ app.get("plaintext") { request in
     enabled–the data will persist with each request.
 */
 app.get("session") { request in
-    let json = Json([
+    let json = JSON([
         "session.data": "\(request.session)",
         "request.cookies": "\(request.cookies)",
         "instructions": "Refresh to see cookie and session get set."
@@ -171,6 +198,26 @@ app.get("session") { request in
 }
 
 /**
+    Add Localization to your app by creating
+    a `Localization` folder in the root of your
+    project.
+
+    /Localization
+       |- en.json
+       |- es.json
+       |_ default.json
+
+    The first parameter to `app.localization` is
+    the language code.
+*/
+app.get("localization", String.self) { request, lang in 
+    return JSON([
+        "title": app.localization[lang, "welcome", "title"],
+        "body": app.localization[lang, "welcome", "body"]
+    ])
+}
+
+/**
     Middleware is a great place to filter 
     and modifying incoming requests and outgoing responses. 
 
@@ -181,7 +228,7 @@ app.get("session") { request in
         app.get() { ... }
     }`
 */
-app.middleware.append(SampleMiddleware())
+app.globalMiddleware.append(SampleMiddleware())
 
  /**        
     Appending a provider allows it to boot      
@@ -190,10 +237,12 @@ app.middleware.append(SampleMiddleware())
     Includes are relative to the Views (`Resources/Views`)
     directory by default.
  */     
- app.providers.append(VaporZewoMustache.Provider(withIncludes: [        
+ app.providers.append(VaporMustache.Provider(withIncludes: [
      "header": "Includes/header.mustache"       
  ]))
 
+let port = app.config["app", "port"].int ?? 80
+
 // Print what link to visit for default port
-print("Visit http://localhost:8080")
-app.start(port: 8080)
+print("Visit http://localhost:\(port)")
+app.start()

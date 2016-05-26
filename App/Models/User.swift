@@ -13,9 +13,9 @@ final class User {
 	passed into Json arrays and dictionaries
 	as if it were a native JSON type.
 */
-extension User: JsonRepresentable {
-    func makeJson() -> Json {
-        return Json([
+extension User: JSONRepresentable {
+    func makeJson() -> JSON {
+        return JSON([
             "name": "\(name)"
         ])
     }

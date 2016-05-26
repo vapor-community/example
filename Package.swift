@@ -7,10 +7,11 @@ let package = Package(
 		.Package(url: "https://github.com/qutheory/vapor-mustache.git", majorVersion: 0, minor: 5)
     ],
     exclude: [
-        "Deploy",
+	    "Config",
+        "Database",
+        "Localization",
         "Public",
         "Resources",
 		"Tests",
-		"Database"
     ]
 )
