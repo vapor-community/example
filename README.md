@@ -7,7 +7,7 @@ Check out the [live demo](http://example.qutheory.io) running on Ubuntu.
 ## Badges
 [![Build Status](https://img.shields.io/travis/qutheory/vapor-example.svg?style=flat-square)](https://travis-ci.org/qutheory/vapor-example)
 [![PRs Welcome](https://img.shields.io/badge/prs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![Slack Status](http://slack.tanner.xyz:8085/badge.svg?style=flat-square)](http://slack.tanner.xyz:8085)
+[![Slack Status](http://slack.tanner.xyz:8085/badge.svg?style=flat-square)](http://slack.qutheory.io)
 
 ## Documentation
 
