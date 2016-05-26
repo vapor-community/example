@@ -111,7 +111,7 @@ app.get("posts", Int.self) { request, postId in
 app.resource("users", controller: UserController.self)
 
 /**
-    VaporZewoMustache hooks into Vapor's view class to
+    VaporMustache hooks into Vapor's view class to
     allow rendering of Mustache templates. You can
     even reference included files setup through the provider.
 */
