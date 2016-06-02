@@ -14,7 +14,7 @@ let app = Application()
 
     Read the docs to learn more
 */
-app.hash.key = app.config["app", "key"].string ?? ""
+//app.hash.key = app.config["app", "key"].string ?? ""
 
 /**
     This first route will return the welcome.html
