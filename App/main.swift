@@ -1,7 +1,19 @@
 import Vapor
 import VaporMustache
 
-let app = Application()
+
+/**
+    Adding a provider allows it to boot
+    and initialize itself as a dependency.
+
+    Includes are relative to the Views (`Resources/Views`)
+    directory by default.
+*/
+let app = Application(providers: [
+    VaporMustache.Provider(withIncludes: [
+        "header": "Includes/header.mustache"
+    ])
+])
 
 /**
     Vapor configuration files are located
@@ -229,17 +241,6 @@ app.get("localization", String.self) { request, lang in
     }`
 */
 app.globalMiddleware.append(SampleMiddleware())
-
- /**        
-    Appending a provider allows it to boot      
-    and initialize itself as a dependency.      
-
-    Includes are relative to the Views (`Resources/Views`)
-    directory by default.
- */     
- app.providers.append(VaporMustache.Provider(withIncludes: [
-     "header": "Includes/header.mustache"       
- ]))
 
 let port = app.config["app", "port"].int ?? 80
 
