@@ -201,7 +201,7 @@ app.get("session") { request in
         "request.cookies": "\(request.cookies)",
         "instructions": "Refresh to see cookie and session get set."
     ])
-    var response = Response(status: .ok, json: json)
+    var response = try Response(status: .ok, json: json)
 
     request.session?["name"] = "Vapor"
     response.cookies["test"] = "123"

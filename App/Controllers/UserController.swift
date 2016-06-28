@@ -4,7 +4,7 @@ class UserController: Controller {
     typealias Item = User
 
     required init(application: Application) {
-        Log.info("User controller created")
+        application.log.info("User controller created")
     }
 
     func index(_ request: Request) throws -> ResponseRepresentable {
