@@ -1,12 +1,13 @@
 import Vapor
 
-class UserController: Controller {
+final class UserController: Resource {
     typealias Item = User
 
-    required init(application: Application) {
-        Log.info("User controller created")
+    let drop: Droplet
+    init(droplet: Droplet) {
+        drop = droplet
     }
-
+    
     func index(_ request: Request) throws -> ResponseRepresentable {
         return JSON([
             "controller": "UserController.index"
@@ -33,7 +34,7 @@ class UserController: Controller {
 
     func update(_ request: Request, item user: User) throws -> ResponseRepresentable {
         //User is JsonRepresentable
-        return user.makeJson()
+        return user.makeJSON()
     }
 
     func destroy(_ request: Request, item user: User) throws -> ResponseRepresentable {

@@ -9,11 +9,39 @@ import VaporMustache
     Includes are relative to the Views (`Resources/Views`)
     directory by default.
 */
-let app = Application(providers: [
-    VaporMustache.Provider(withIncludes: [
-        "header": "Includes/header.mustache"
-    ])
+let mustache = VaporMustache.Provider(withIncludes: [
+    "header": "Includes/header.mustache"
 ])
+
+/**
+    Xcode defaults to a working directory in
+    a temporary build folder. 
+    
+    In order for Vapor to access Resources and
+    Configuration files, the working directory
+    must be the root directory of your project.
+ 
+    This can also be achieved by passing
+    --workDir=$(SRCROOT) in the Xcode arguments
+    or setting the root directory manually in:
+    Edit Scheme > Options > [ ] Use custom working directory
+*/
+let workDir: String?
+#if Xcode
+    let parent = #file.characters.split(separator: "/").map(String.init).dropLast().joined(separator: "/")
+    workDir = "/\(parent)/.."
+#else
+    workDir = nil
+#endif
+
+/**
+    Droplets are service containers that make accessing
+    all of Vapor's features easy. Just call
+    `drop.serve()` to serve your application
+    or `drop.client()` to create a client for
+    request data from other servers.
+*/
+let drop = Droplet(workDir: workDir, providers: [mustache])
 
 /**
     Vapor configuration files are located
@@ -26,7 +54,8 @@ let app = Application(providers: [
 
     Read the docs to learn more
 */
-//app.hash.key = app.config["app", "key"].string ?? ""
+let key = drop.config["app", "key"].string ?? ""
+drop.console.output("Hash key is: \(key)", style: .info)
 
 /**
     This first route will return the welcome.html
@@ -38,8 +67,8 @@ let app = Application(providers: [
     You can override the working directory by passing
     --workDir to the application upon execution.
 */
-app.get("/") { request in
-    return try app.view("welcome.html")
+drop.get("/") { request in
+    return try drop.view("welcome.html")
 }
 
 /**
@@ -55,7 +84,7 @@ app.get("/") { request in
     the data structure into any JSON data as if it
     were a native JSON data type.
 */
-app.get("json") { request in
+drop.get("json") { request in
     return JSON([
         "number": 123,
         "string": "test",
@@ -91,7 +120,7 @@ app.get("json") { request in
     - Form URL-Encoded: request.data.formEncoded
     - MultiPart: request.data.multipart
 */
-app.any("data") { request in
+drop.any("data") { request in
     return JSON([
         "name": request.data["users", 0, "name"].string ?? "no name"
     ])
@@ -107,7 +136,7 @@ app.any("data") { request in
 
     The User model included in this example is StringInitializable.
 */
-app.get("posts", Int.self) { request, postId in 
+drop.get("posts", Int.self) { request, postId in
     return "Requesting post with ID \(postId)"
 }
 
@@ -120,15 +149,17 @@ app.get("posts", Int.self) { request, postId in
     defined by which StringInitializable class they choose
     to receive as parameters to their functions.
 */
-app.resource("users", controller: UserController.self)
+
+let users = UserController(droplet: drop)
+drop.resource("users", users)
 
 /**
     VaporMustache hooks into Vapor's view class to
     allow rendering of Mustache templates. You can
     even reference included files setup through the provider.
 */
-app.get("mustache") { request in
-    return try app.view("template.mustache", context: [
+drop.get("mustache") { request in
+    return try drop.view("template.mustache", context: [
         "greeting": "Hello, world!"
     ])
 }
@@ -169,7 +200,7 @@ class Employee {
     to be returned as Json
 */
 extension Employee: JSONRepresentable {
-    func makeJson() -> JSON {
+    func makeJSON() -> JSON {
         return JSON([
             "email": email.value,
             "name": name.value
@@ -177,7 +208,7 @@ extension Employee: JSONRepresentable {
     }
 }
 
-app.any("validation") { request in
+drop.any("validation") { request in
     return try Employee(request: request)
 }
 
@@ -185,7 +216,7 @@ app.any("validation") { request in
     This simple plaintext response is useful
     when benchmarking Vapor.
 */
-app.get("plaintext") { request in
+drop.get("plaintext") { request in
     return "Hello, World!"
 }
 
@@ -195,13 +226,13 @@ app.get("plaintext") { request in
     the session variable and–if the user has cookies
     enabled–the data will persist with each request.
 */
-app.get("session") { request in
+drop.get("session") { request in
     let json = JSON([
         "session.data": "\(request.session)",
         "request.cookies": "\(request.cookies)",
         "instructions": "Refresh to see cookie and session get set."
     ])
-    var response = Response(status: .ok, json: json)
+    var response = try Response(status: .ok, json: json)
 
     request.session?["name"] = "Vapor"
     response.cookies["test"] = "123"
@@ -222,10 +253,10 @@ app.get("session") { request in
     The first parameter to `app.localization` is
     the language code.
 */
-app.get("localization", String.self) { request, lang in 
+drop.get("localization", String.self) { request, lang in
     return JSON([
-        "title": app.localization[lang, "welcome", "title"],
-        "body": app.localization[lang, "welcome", "body"]
+        "title": drop.localization[lang, "welcome", "title"],
+        "body": drop.localization[lang, "welcome", "body"]
     ])
 }
 
@@ -240,10 +271,10 @@ app.get("localization", String.self) { request, lang in
         app.get() { ... }
     }`
 */
-app.globalMiddleware.append(SampleMiddleware())
+drop.globalMiddleware.append(SampleMiddleware())
 
-let port = app.config["app", "port"].int ?? 80
+let port = drop.config["app", "port"].int ?? 80
 
 // Print what link to visit for default port
 print("Visit http://localhost:\(port)")
-app.start()
+drop.serve()
