@@ -7,7 +7,11 @@ Check out the [live demo](http://example.qutheory.io) running on Ubuntu.
 ## Badges
 [![Build Status](https://img.shields.io/travis/qutheory/vapor-example.svg?style=flat-square)](https://travis-ci.org/qutheory/vapor-example)
 [![PRs Welcome](https://img.shields.io/badge/prs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![Slack Status](http://slack.tanner.xyz:8085/badge.svg?style=flat-square)](http://slack.qutheory.io)
+[![Slack Status](http://slack.qutheory.io/badge.svg?style=flat-square)](http://slack.qutheory.io)
+
+## Deploy
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 ## Documentation
 
@@ -28,7 +32,7 @@ Visit [Getting Started](https://github.com/qutheory/vapor/wiki/Setup) in the Vap
 ### Swift 3.0
 
 Check out Kylef's [swiftenv](https://github.com/kylef/swiftenv) for ensuring you have the latest
-version of Swift installed. This project contains a `.swift-version` file which will tell `swiftenv` which version of Swift to build with automatically. 
+version of Swift installed. This project contains a `.swift-version` file which will tell `swiftenv` which version of Swift to build with automatically.
 
 If you dont want to use `swiftenv`, visit [Swift.org](http://swift.org) to learn more about installing development snapshots on your system.
 
@@ -42,11 +46,11 @@ If you have the Vapor CLI, use `vapor new <project-name>` to create your new app
 
 Then run `vapor build` and `vapor run`.
 
-Otherwise, clone this repo and run `swift build` to compile your application, then run `.build/debug/App`. 
+Otherwise, clone this repo and run `swift build` to compile your application, then run `.build/debug/App`.
 
 ### Xcode 7.3
 
-Run `vapor xcode` which will create the Xcode Project and open Xcode 7.3. Make sure Xcode > Toolchains is set to `swift-DEVELOPMENT-SNAPSHOT-2016-05-09-a.xctoolchain` or later. 
+Run `vapor xcode` which will create the Xcode Project and open Xcode 7.3. Make sure Xcode > Toolchains is set to `swift-DEVELOPMENT-SNAPSHOT-2016-05-09-a.xctoolchain` or later.
 
 ![Xcode](https://cloud.githubusercontent.com/assets/1342803/15592631/3e740df8-2373-11e6-8624-3c89260322aa.png)
 
