@@ -9,7 +9,7 @@ Check out the [live demo](http://example.qutheory.io) running on Ubuntu.
 [![PRs Welcome](https://img.shields.io/badge/prs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![Slack Status](http://slack.qutheory.io/badge.svg?style=flat-square)](http://slack.qutheory.io)
 
-## Deploy Ready
+## Deploy
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
