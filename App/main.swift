@@ -264,10 +264,10 @@ drop.get("localization", String.self) { request, lang in
     Middleware is a great place to filter 
     and modifying incoming requests and outgoing responses. 
 
-    Check out the middleware in App/Middelware.
+    Check out the middleware in App/Middleware.
 
     You can also add middleware to a single route by
-    calling the routes inside of `app.middleware(MiddelwareType) { 
+    calling the routes inside of `app.middleware(MiddlewareType) { 
         app.get() { ... }
     }`
 */
