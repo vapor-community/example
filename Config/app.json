@@ -1,3 +1,14 @@
 {
-	"key": "default-key"
+	// This will be the default key for 
+	// 		drop.config["app", "key"]`
+	// if no environment or secret files replace it.
+	//
+	// However, there is a secrets/app.json with a key
+	// so this value will always be replaced.
+	"key": "default-key",
+
+	// This is never overridden by any environment folders
+	// or the secret folder. Most configuration properties
+	// do not need to change for a given environment. 
+	"foo": "bar"
 }

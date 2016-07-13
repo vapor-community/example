@@ -1,0 +1,7 @@
+{
+	// In production environments, the app key
+	// will be expected to be in the Process environment.
+	//
+	// Passing --env=production sets the production environment.
+	"key": "$VAPOR_APP_KEY"
+}

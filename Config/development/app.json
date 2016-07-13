@@ -1,4 +1,10 @@
 {
-	"port": 8080,
+	// The development environment has its own key.
+	// This is useful for staging servers, etc that need
+	// their own dedicated, shared keys that should be
+	// different in production.
+	//
+	// Passing --env=development explicitly sets the development
+	// environment. However, this is set by default if nothing is passed.
 	"key": "development-key"
 }

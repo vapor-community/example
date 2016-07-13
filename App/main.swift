@@ -54,8 +54,7 @@ let drop = Droplet(workDir: workDir, providers: [mustache])
 
     Read the docs to learn more
 */
-let key = drop.config["app", "key"].string ?? ""
-drop.console.output("Hash key is: \(key)", style: .info)
+let _ = drop.config["app", "key"].string ?? ""
 
 /**
     This first route will return the welcome.html
@@ -120,9 +119,10 @@ drop.get("json") { request in
     - Form URL-Encoded: request.data.formEncoded
     - MultiPart: request.data.multipart
 */
-drop.any("data") { request in
+drop.get("data", Int.self) { request, int in
     return JSON([
-        "name": request.data["users", 0, "name"].string ?? "no name"
+        "int": int,
+        "name": request.data["name"].string ?? "no name"
     ])
 }
 
@@ -276,5 +276,4 @@ drop.globalMiddleware.append(SampleMiddleware())
 let port = drop.config["app", "port"].int ?? 80
 
 // Print what link to visit for default port
-print("Visit http://localhost:\(port)")
 drop.serve()
