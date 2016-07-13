@@ -1,3 +1,4 @@
 {
-	"key": "default-key"
+	"key": "default-key",
+	"foo": "bar"
 }
