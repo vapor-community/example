@@ -62,7 +62,9 @@ description "Vapor Example"
 
 start on startup
 
-exec /home/<user_name>/vapor-example/.build/release/App
+env PORT=8080
+
+exec /home/<user_name>/vapor-example/.build/release/App --env=production
 ```
 
 You additionally have access to the following commands for starting and stopping your server.
@@ -146,6 +148,7 @@ server {
 	location @proxy {
 		# Make sure the port here matches the port in your Supervisor config
 		proxy_pass http://127.0.0.1:8080;
+		proxy_pass_header Server;
 		proxy_set_header Host $host;
 		proxy_set_header X-Real-IP $remote_addr;
 		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
