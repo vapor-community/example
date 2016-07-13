@@ -19,7 +19,7 @@ View [Vapor](https://github.com/qutheory/vapor) for documentation.
 
 ## Requirements
 
-Swift 3.0 beta 2 is required (Xcode 8 beta 2 on macOS). 
+Swift 3.0 preview 2 is required (Xcode 8 beta 2 on macOS). 
 
 Works on Ubuntu, Docker, Heroku, macOS.
 

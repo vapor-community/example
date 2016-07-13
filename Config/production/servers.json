@@ -1,7 +1,5 @@
 {
 	"production": {
-		"port": "$PORT",
-		"host": "0.0.0.0",
-		"securityLayer": "none"
+		"port": "$PORT"
 	}
 }
