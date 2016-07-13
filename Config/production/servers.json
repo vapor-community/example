@@ -1,6 +1,6 @@
 {
 	// In the production environment, the server will
-	// attempt to pull port and host information from the Process environment.
+	// attempt to pull port information from the Process environment.
 	//
 	// This can be set with `env port=8080` in the terminal,
 	// or by other means with hosting services like Heroku.
@@ -8,7 +8,7 @@
 	// Passing --env=production sets the production environment.
 	"production": {
 		"port": "$PORT",
-		"host": "$HOST",
+		"host": "0.0.0.0",
 		"securityLayer": "none"
 	}
 }
