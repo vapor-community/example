@@ -1,13 +1,7 @@
 {
-	// This will be the default server if no other servers.json
-	// file is found in the environments or secret folders.
-	//
-	// Multiple servers can be booted by supplying another
-	// entry alongside this default entry. The name "default"
-	// can also be changed.
 	"default": {
 		"port": 8080,
 		"host": "0.0.0.0",
-		"securityLayer": "none" // or "tls"
+		"securityLayer": "none"
 	}
 }
