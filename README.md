@@ -19,42 +19,33 @@ View [Vapor](https://github.com/qutheory/vapor) for documentation.
 
 ## Requirements
 
-Swift 2.2 or later is required (3.0 or later for certain features).
+Swift 3.0 beta 2 is required (Xcode 8 beta 2 on macOS). 
 
-Works on Ubuntu, Docker, Heroku, OS X
+Works on Ubuntu, Docker, Heroku, macOS.
+
+Run the following script to check if you have Swift 3.0 beta 2 properly installed and configured.
+
+```
+curl -sL check.qutheory.io | bash
+```
 
 ## Building
 
-### Swift 2.2
-
-Visit [Getting Started](https://github.com/qutheory/vapor/wiki/Setup) in the Vapor Wiki for more details about using Swift 2.2.
-
-### Swift 3.0
-
-Check out Kylef's [swiftenv](https://github.com/kylef/swiftenv) for ensuring you have the latest
-version of Swift installed. This project contains a `.swift-version` file which will tell `swiftenv` which version of Swift to build with automatically.
-
-If you dont want to use `swiftenv`, visit [Swift.org](http://swift.org) to learn more about installing development snapshots on your system.
-
-### Vapor CLI
-
-The Vapor Command Line Interface makes it easy to build and run Vapor projects. Install it [here](https://github.com/qutheory/vapor-cli)
+Visit [Getting Started](http://docs.qutheory.io) in the documentation.
 
 ### Compiling
 
-If you have the Vapor CLI, use `vapor new <project-name>` to create your new application.
+If you have the [Vapor Toolbox](https://github.com/qutheory/vapor-toolbox), use `vapor new <project-name>` to create your new application.
 
 Then run `vapor build` and `vapor run`.
 
 Otherwise, clone this repo and run `swift build` to compile your application, then run `.build/debug/App`.
 
-### Xcode 7.3
+### Xcode 8
 
-Run `vapor xcode` which will create the Xcode Project and open Xcode 7.3. Make sure Xcode > Toolchains is set to `swift-DEVELOPMENT-SNAPSHOT-2016-05-09-a.xctoolchain` or later.
+Run `vapor xcode` which will create the Xcode Project and open Xcode 8.
 
 ![Xcode](https://cloud.githubusercontent.com/assets/1342803/15592631/3e740df8-2373-11e6-8624-3c89260322aa.png)
-
-Make sure your Xcode project is set to run with the working directory set to the root of the project. You can do this by going to Schemes (App or VaporApp) > Edit Scheme > Run > Options > Working Directory > Use Custom Working Directory.
 
 ## Deploying
 
@@ -71,7 +62,7 @@ description "Vapor Example"
 
 start on startup
 
-exec /home/<user_name>/vapor-example/.build/release/App --workDir=/home/<user_name>/vapor-example
+exec /home/<user_name>/vapor-example/.build/release/App
 ```
 
 You additionally have access to the following commands for starting and stopping your server.
@@ -92,13 +83,13 @@ sudo start vapor-example
 
 ### Heroku
 
-Use the `vapor heroku` commands in the CLI to push to Heroku.
+Use the `vapor heroku` commands in the Vapor Toolbox to push to Heroku.
 
 ### Docker
 
 You can run this demo application locally in a Linux environment using Docker.
 
-Make sure you have installed the Vapor CLI.
+Make sure you have installed the Vapor Toolbox.
 
 1. Ensure [Docker](https://www.docker.com) is installed on your local machine.
 2. Start the Docker terminal
