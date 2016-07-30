@@ -1,32 +1,30 @@
 import Vapor
+import Fluent
 
-final class User {
+final class User: Model {
+    var id: Node?
     var name: String
     
     init(name: String) {
         self.name = name
     }
-}
 
-/**
-	This allows instances of User to be 
-	passed into Json arrays and dictionaries
-	as if it were a native JSON type.
-*/
-extension User: JSONRepresentable {
-    func makeJSON() throws -> JSON {
-        return try JSON([
-            "name": "\(name)"
+    init(node: Node, in context: Context) throws {
+        id = try node.extract("id")
+        name = try node.extract("name")
+    }
+
+    func makeNode() throws -> Node {
+        return try Node(node: [
+            "name": name
         ])
     }
-}
 
-/**
-	If a data structure is StringInitializable, 
-	it's Type can be passed into type-safe routing handlers.
-*/
-extension User: StringInitializable {
-    convenience init?(from string: String) throws {
-        self.init(name: string)
+    static func prepare(_ database: Database) throws {
+        //
+    }
+
+    static func revert(_ database: Database) throws {
+        //
     }
 }
