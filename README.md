@@ -55,6 +55,18 @@ Check the [Vapor](https://github.com/qutheory/vapor) documentation for more in-d
 
 To start your `Vapor` site automatically when the server is booted, add this file to your server.
 
+You can check if Upstart is installed with 
+
+```sh
+initctl --version
+```
+
+You may need to install Upstart if it is not already on your installation of Linux.
+
+```sh
+sudo apt-get install upstart
+```
+
 `/etc/init/vapor-example.conf`
 
 ```conf
