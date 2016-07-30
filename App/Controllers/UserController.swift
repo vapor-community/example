@@ -1,6 +1,7 @@
 import Vapor
+import HTTP
 
-final class UserController: Resource {
+final class UserController: ResourceRepresentable {
     typealias Item = User
 
     let drop: Droplet
@@ -9,13 +10,13 @@ final class UserController: Resource {
     }
     
     func index(request: Request) throws -> ResponseRepresentable {
-        return JSON([
+        return try JSON([
             "controller": "UserController.index"
         ])
     }
 
     func store(request: Request) throws -> ResponseRepresentable {
-        return JSON([
+        return try JSON([
             "controller": "UserController.store"
         ])
     }
@@ -26,7 +27,7 @@ final class UserController: Resource {
     */
     func show(request: Request, item user: User) throws -> ResponseRepresentable {
         //User can be used like JSON with JsonRepresentable
-        return JSON([
+        return try JSON([
             "controller": "UserController.show",
             "user": user
         ])
@@ -42,4 +43,13 @@ final class UserController: Resource {
         return user
     }
 
+    func makeResource() -> Resource<User> {
+        return Resource(
+            index: index,
+            store: store,
+            show: show,
+            replace: update,
+            destroy: destroy
+        )
+    }
 }
