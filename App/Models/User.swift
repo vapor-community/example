@@ -14,8 +14,8 @@ final class User {
 	as if it were a native JSON type.
 */
 extension User: JSONRepresentable {
-    func makeJSON() -> JSON {
-        return JSON([
+    func makeJSON() throws -> JSON {
+        return try JSON([
             "name": "\(name)"
         ])
     }

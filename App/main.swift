@@ -1,5 +1,6 @@
 import Vapor
-import VaporMustache
+import HTTP
+//import VaporMustache
 
 
 /**
@@ -9,9 +10,10 @@ import VaporMustache
     Includes are relative to the Views (`Resources/Views`)
     directory by default.
 */
-let mustache = VaporMustache.Provider(withIncludes: [
-    "header": "Includes/header.mustache"
-])
+// Temporarily disabled while Mustache gets upgraded to 07-25
+//let mustache = VaporMustache.Provider(withIncludes: [
+//    "header": "Includes/header.mustache"
+//])
 
 /**
     Xcode defaults to a working directory in
@@ -41,7 +43,7 @@ let workDir: String?
     or `drop.client()` to create a client for
     request data from other servers.
 */
-let drop = Droplet(workDir: workDir, providers: [mustache])
+let drop = Droplet(workDir: workDir) //, providers: [mustache])
 
 /**
     Vapor configuration files are located
@@ -84,13 +86,13 @@ drop.get("/") { request in
     were a native JSON data type.
 */
 drop.get("json") { request in
-    return JSON([
+    return try JSON([
         "number": 123,
         "string": "test",
-        "array": JSON([
+        "array": try JSON([
             0, 1, 2, 3
         ]),
-        "dict": JSON([
+        "dict": try JSON([
             "name": "Vapor",
             "lang": "Swift"
         ])
@@ -120,7 +122,7 @@ drop.get("json") { request in
     - MultiPart: request.data.multipart
 */
 drop.get("data", Int.self) { request, int in
-    return JSON([
+    return try JSON([
         "int": int,
         "name": request.data["name"].string ?? "no name"
     ])
@@ -200,17 +202,18 @@ class Employee {
     to be returned as Json
 */
 extension Employee: JSONRepresentable {
-    func makeJSON() -> JSON {
-        return JSON([
+    func makeJSON() throws -> JSON {
+        return try JSON([
             "email": email.value,
             "name": name.value
         ])
     }
 }
 
-drop.any("validation") { request in
-    return try Employee(request: request)
-}
+// Temporarily unavailable
+//drop.any("validation") { request in
+//    return try Employee(request: request)
+//}
 
 /**
     This simple plaintext response is useful
@@ -227,7 +230,7 @@ drop.get("plaintext") { request in
     enabled–the data will persist with each request.
 */
 drop.get("session") { request in
-    let json = JSON([
+    let json = try JSON([
         "session.data": "\(request.session)",
         "request.cookies": "\(request.cookies)",
         "instructions": "Refresh to see cookie and session get set."
@@ -254,7 +257,7 @@ drop.get("session") { request in
     the language code.
 */
 drop.get("localization", String.self) { request, lang in
-    return JSON([
+    return try JSON([
         "title": drop.localization[lang, "welcome", "title"],
         "body": drop.localization[lang, "welcome", "body"]
     ])
