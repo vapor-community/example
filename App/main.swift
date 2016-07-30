@@ -1,40 +1,6 @@
 import Vapor
 import HTTP
-//import VaporMustache
 
-
-/**
-    Adding a provider allows it to boot
-    and initialize itself as a dependency.
-
-    Includes are relative to the Views (`Resources/Views`)
-    directory by default.
-*/
-// Temporarily disabled while Mustache gets upgraded to 07-25
-//let mustache = VaporMustache.Provider(withIncludes: [
-//    "header": "Includes/header.mustache"
-//])
-
-/**
-    Xcode defaults to a working directory in
-    a temporary build folder. 
-    
-    In order for Vapor to access Resources and
-    Configuration files, the working directory
-    must be the root directory of your project.
- 
-    This can also be achieved by passing
-    --workDir=$(SRCROOT) in the Xcode arguments
-    or setting the root directory manually in:
-    Edit Scheme > Options > [ ] Use custom working directory
-*/
-let workDir: String?
-#if Xcode
-    let parent = #file.characters.split(separator: "/").map(String.init).dropLast().joined(separator: "/")
-    workDir = "/\(parent)/.."
-#else
-    workDir = nil
-#endif
 
 /**
     Droplets are service containers that make accessing
@@ -43,7 +9,7 @@ let workDir: String?
     or `drop.client()` to create a client for
     request data from other servers.
 */
-let drop = Droplet(workDir: workDir) //, providers: [mustache])
+let drop = Droplet()
 
 /**
     Vapor configuration files are located
