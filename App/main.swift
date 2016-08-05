@@ -1,4 +1,5 @@
 import Vapor
+import VaporMustache
 import HTTP
 
 
@@ -9,7 +10,7 @@ import HTTP
     or `drop.client()` to create a client for
     request data from other servers.
 */
-let drop = Droplet()
+let drop = Droplet(providers: [VaporMustache.Provider.self])
 
 /**
     Vapor configuration files are located
@@ -240,7 +241,7 @@ drop.get("localization", String.self) { request, lang in
         app.get() { ... }
     }`
 */
-drop.globalMiddleware.append(SampleMiddleware())
+drop.middleware.append(SampleMiddleware())
 
 let port = drop.config["app", "port"].int ?? 80
 
