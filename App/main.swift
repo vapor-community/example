@@ -250,6 +250,24 @@ drop.get("localization", String.self) { request, lang in
 }
 
 /**
+	Vapor makes hashing strings easy. This is great
+	for things like securely storing passwords.
+
+	You can also change the default hasher like:
+
+	let sha512 = SHA2Hasher(variant: .sha512)
+	let drop = Droplet(hash: sha512)
+
+	Additionally, you can create your own hasher
+	simply by conforming to the `Hash` protocol.
+*/
+drop.get("hash", String.self) { request, hashValue in
+	return try JSON([
+		"hashed": drop.hash.make(hashValue)
+	])
+}
+
+/**
     Middleware is a great place to filter 
     and modifying incoming requests and outgoing responses. 
 
