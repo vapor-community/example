@@ -4,31 +4,42 @@ import Fluent
 
 final class Post: Model { // TODO: Add date posted
 	var id: Node?
-	var text: String
-	var userId: Node? // TODO: Describe one many relationship
+	var text: String // The text inside of teh post
+	var userId: Node? // A post is a child of a User, so we need to keep track of the owner
 	
 	init(text: String, user: User?) {
+		/**
+			
+		*/
 		self.text = text // TODO: Validator
 		self.userId = user?.id
 	}
 	
 	init(node: Node, in context: Vapor.Context) throws {
+		/**
+			
+		*/
 		id = try node.extract("id")
 		text = try node.extract("text")
 		userId = try node.extract("user_id")
 	}
 	
 	func makeNode() throws -> Node {
+		/**
+			
+		*/
 		return try Node(node: [
 			"id": id,
 			"text": text,
-//			"user": try user().get() // TODO: Why is this not working?
+//			"user": try user().get() // TODO: Shouldn't this work?
 			"user_id": userId
 		])
 	}
 	
 	static func prepare(_ database: Database) throws {
-		// TODO: Describe
+		/**
+		
+		*/
 		try database.create(entity) { users in
 			users.id()
 			users.string("text")
@@ -38,16 +49,26 @@ final class Post: Model { // TODO: Add date posted
 	}
 	
 	static func revert(_ database: Database) throws {
-		// TODO: Describe
+		/**
+		
+		*/
 		try database.delete(entity)
 	}
 	
 	func user() throws -> Parent<User> {
-		// TODO: Describe
+		/**
+			
+		*/
 		return try parent(userId, User.self)
 	}
 }
 
+/**
+	Here, we must make the Post object
+	usable from the Mustache documents,
+	so we have to tell Mustache how this
+	data behaves.
+*/
 extension Post: MustacheBoxable {
 	var mustacheBox: MustacheBox {
 		return MustacheBox(

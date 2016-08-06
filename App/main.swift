@@ -6,10 +6,7 @@ import HTTP
 
 /*
 TODO:
-Make the posts page pretty
-Make clear the user they don't need to setup a database
-Handle no database
-Make frontend for post board
+Make the board page pretty
 Database initiation instructions in README
 Make links for all this in index.html
 Add HTTP client example
@@ -242,7 +239,7 @@ class Employee {
 
 /**
     Allows any instance of employee
-    to be returned as Json
+    to be returned as JSON
 */
 extension Employee: JSONRepresentable {
     func makeJSON() throws -> JSON {
@@ -259,8 +256,25 @@ extension Employee: JSONRepresentable {
 //}
 
 // MARK: Databse
+/**
+	Vapor provides a built-in Simple ActiveRecord
+	implmentation called Fluent. This provides a
+	a fast and powerful way to interface with a database
+	inside your webserver.
+*/
+
+let noDatabaseMessage = "Your database is not set up. Please see the README.md."
+
+/**
+	This provides an endpoint to check that your datbase
+	is working and what version it's running.
+*/
 drop.get("db-version") { request in
-	guard let version = try drop.database?.driver.raw("SELECT @@version AS version")[0].object?["version"].string else {
+	guard let database = drop.database else {
+		return noDatabaseMessage
+	}
+	
+	guard let version = try database.driver.raw("SELECT @@version AS version")[0].object?["version"].string else {
 		return try JSON(["error": "Could not get database version."])
 	}
 	
@@ -269,21 +283,50 @@ drop.get("db-version") { request in
 	])
 }
 
+// MARK: Board
+/**
+	Here, we create a group to manage the board, a 
+	very basic forum-style site where anyone can post
+	anything.
+*/
 drop.group("board") { board in
+	/**
+		At the root, the board view is rendered with the items
+		on the board and a form to post new items.
+	*/
 	board.get("/") { request in
+		// Check there is a datbase
+		guard let database = drop.database else {
+			return noDatabaseMessage
+		}
+		
+		// Get all the posts
 		let posts = try Post.query().all()
+		
+		// Render the board with all the posts
 		return try drop.view("board.mustache", context: ["posts": posts])
 	}
 	
+	/**
+		This endpoint is hit by the client using the form at
+		/boards. When the request is complete, it redirects
+		to /boards.
+	*/
 	board.post("/post") { request in
+		// Check there is a database
+		guard let database = drop.database else {
+			return noDatabaseMessage
+		}
+		
+		// Get the reqeuest data
 		guard let username = request.data["username"].string, let text = request.data["text"].string else {
 			return "Could not get username and text." // TODO: Error page? Mabye too complex?
 		}
 		
-		// Check if the user already exists
+		// Fetch any user with the username
 		var user = try User.query().filter("name", .equals, username).first()
 		
-		// If not, create the user
+		// If none exists, create the user
 		if user == nil {
 			user = User(name: username)
 			try user?.save()
@@ -293,6 +336,7 @@ drop.group("board") { board in
 		var post = Post(text: text, user: user)
 		try post.save()
 		
+		// Reidrect to /board
 		return Response(redirect: "../board")
 	}
 }
