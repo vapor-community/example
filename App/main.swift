@@ -242,6 +242,17 @@ extension Employee: JSONRepresentable {
 //    return try Employee(request: request)
 //}
 
+// MARK: Databse
+drop.get("db-version") { request in
+	guard let version = try drop.database?.driver.raw("SELECT @@version AS version")[0].object?["version"].string else {
+		return try JSON(["error": "Could not get database version."])
+	}
+	
+	return try JSON([
+		"version": version
+	])
+}
+
 // MARK: Session
 /**
     Vapor automatically handles setting
