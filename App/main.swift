@@ -96,17 +96,36 @@ drop.get("data", Int.self) { request, int in
 }
 
 /**
-    Here's an example of using type-safe routing to ensure 
-    only requests to "posts/<some-integer>" will be handled.
+	Here's an example of using type-safe routing to ensure
+	only requests to "math/<some-float>" will be handled.
 
-    String is the most general and will match any request
-    to "posts/<some-string>". To make your data structure
-    work with type-safe routing, make it StringInitializable.
+	String is the most general and will match any request
+	to "route/<some-string>".
 
-    The User model included in this example is StringInitializable.
+	Vapor currently limits you to three path components.
+	When you need more than three path components,
+	consider using a group.
 */
-drop.get("posts", Int.self) { request, postId in
-    return "Requesting post with ID \(postId)"
+drop.get("math", Int.self) { request, number in
+	return try JSON([
+		"number":      number,
+		"number * 2":  number * 2,
+		"number / 2":  number / 2,
+		"number << 2": number << 2
+	])
+}
+
+/**
+	Any type that conforms to `StringInitializable` can be used
+	as a type-safe routing parameter. The `User` model included
+	in this example is `StringInitializable`, so it can be
+	used as a parameter.
+*/
+drop.get("user", User.self) { request, user in
+	return try JSON([
+		"success": true,
+		"user": user
+	])
 }
 
 /**
