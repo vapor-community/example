@@ -3,22 +3,23 @@ import VaporMySQL
 import VaporMustache
 import HTTP
 
-// TODO: This main.swift file is getting a tad big. Maybe we should break it down into collections?
+// TODO: Database initiation instructions in README
 
-/**
-
-*/
-
-
-// MARK: Initiation
+// MARK: Droplet initiation
 /**
     Droplets are service containers that make accessing
     all of Vapor's features easy. Just call
     `drop.serve()` to serve your application
     or `drop.client()` to create a client for
     request data from other servers.
+
+	As you can see, the droplet is given two providers. A
+	provider gives a way for adding functionality from
+	third party packages to Vapor. Here, we set up
+	VaporMustache for rendering views and VaporMySQL
+	for our database.
 */
-let drop = Droplet(providers: [VaporMustache.Provider.self])
+let drop = Droplet(providers: [VaporMustache.Provider.self, VaporMySQL.Provider.self])
 
 /**
     Vapor configuration files are located
