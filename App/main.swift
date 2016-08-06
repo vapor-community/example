@@ -3,7 +3,18 @@ import VaporMySQL
 import VaporMustache
 import HTTP
 
-// TODO: Database initiation instructions in README
+/*
+TODO:
+Database initiation instructions in README
+Make links for all this in index.html
+Add client example
+Websocket example
+SMTP documentation
+
+Plan:
+Anyone can post with username
+Any can reply with username
+*/
 
 // MARK: Droplet initiation
 /**
