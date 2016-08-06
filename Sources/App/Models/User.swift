@@ -2,8 +2,8 @@ import Vapor
 import Mustache
 import Fluent
 
-final class User: Model {
-    var id: Node?
+public final class User: Model {
+    public var id: Node?
     var name: String // The username belonging to this user
     
     init(name: String) {
@@ -13,7 +13,7 @@ final class User: Model {
         self.name = name // TODO: Validator
     }
 
-    init(node: Node, in context: Vapor.Context) throws {
+    public init(node: Node, in context: Vapor.Context) throws {
 		/**
 			
 		*/
@@ -21,17 +21,17 @@ final class User: Model {
         name = try node.extract("name")
     }
 
-    func makeNode() throws -> Node {
+    public func makeNode() throws -> Node {
 		/**
 			
-		*//
+		*/
         return try Node(node: [
 			"id": id,
             "name": name
         ])
     }
 
-    static func prepare(_ database: Database) throws {
+    public static func prepare(_ database: Database) throws {
 		/**
 		
 		*/
@@ -41,7 +41,7 @@ final class User: Model {
 		}
     }
 
-    static func revert(_ database: Database) throws {
+    public static func revert(_ database: Database) throws {
 		/**
 			
 		*/
@@ -64,13 +64,13 @@ final class User: Model {
 }
 
 /**
-Here, we must make the Post object
-usable from the Mustache documents,
-so we have to tell Mustache how this
-data behaves.
+	Here, we must make the Post object
+	usable from the Mustache documents,
+	so we have to tell Mustache how this
+	data behaves.
 */
 extension User: MustacheBoxable {
-	var mustacheBox: MustacheBox {
+	public var mustacheBox: MustacheBox {
 		return MustacheBox(
 			value: self,
 			boolValue: nil,

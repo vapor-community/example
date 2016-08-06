@@ -2,11 +2,11 @@ import Vapor
 import HTTP
 
 // TODO: Make this actually show users
-final class UserController: ResourceRepresentable {
+public final class UserController: ResourceRepresentable {
     typealias Item = User
 
     let drop: Droplet
-    init(droplet: Droplet) {
+    public init(droplet: Droplet) {
         drop = droplet
     }
     
@@ -44,7 +44,7 @@ final class UserController: ResourceRepresentable {
         return user
     }
 
-    func makeResource() -> Resource<User> {
+    public func makeResource() -> Resource<User> {
         return Resource(
             index: index,
             store: store,

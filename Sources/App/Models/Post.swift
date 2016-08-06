@@ -2,8 +2,8 @@ import Vapor
 import Mustache
 import Fluent
 
-final class Post: Model { // TODO: Add date posted
-	var id: Node?
+public final class Post: Model { // TODO: Add date posted
+	public var id: Node?
 	var text: String // The text inside of teh post
 	var userId: Node? // A post is a child of a User, so we need to keep track of the owner
 	
@@ -15,7 +15,7 @@ final class Post: Model { // TODO: Add date posted
 		self.userId = user?.id
 	}
 	
-	init(node: Node, in context: Vapor.Context) throws {
+	public init(node: Node, in context: Vapor.Context) throws {
 		/**
 			
 		*/
@@ -24,7 +24,7 @@ final class Post: Model { // TODO: Add date posted
 		userId = try node.extract("user_id")
 	}
 	
-	func makeNode() throws -> Node {
+	public func makeNode() throws -> Node {
 		/**
 			
 		*/
@@ -36,7 +36,7 @@ final class Post: Model { // TODO: Add date posted
 		])
 	}
 	
-	static func prepare(_ database: Database) throws {
+	public static func prepare(_ database: Database) throws {
 		/**
 		
 		*/
@@ -48,7 +48,7 @@ final class Post: Model { // TODO: Add date posted
 		
 	}
 	
-	static func revert(_ database: Database) throws {
+	public static func revert(_ database: Database) throws {
 		/**
 		
 		*/
@@ -70,7 +70,7 @@ final class Post: Model { // TODO: Add date posted
 	data behaves.
 */
 extension Post: MustacheBoxable {
-	var mustacheBox: MustacheBox {
+	public var mustacheBox: MustacheBox {
 		return MustacheBox(
 			value: self,
 			boolValue: nil,
