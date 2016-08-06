@@ -1,6 +1,7 @@
 import Vapor
 import HTTP
 
+// TODO: Make this actually show users
 final class UserController: ResourceRepresentable {
     typealias Item = User
 

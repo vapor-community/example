@@ -1,0 +1,9 @@
+{
+	"__comment": "See README.md for instructions on setting up the database.",
+	"host": "127.0.0.1",
+	"user": "root",
+	"password": "",
+	"database": "vapor_example",
+	"port": 3306,
+	"flag": 0
+}

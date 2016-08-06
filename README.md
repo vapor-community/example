@@ -15,11 +15,13 @@ Check out the [live demo](http://example.qutheory.io) running on Ubuntu.
 
 ## Documentation
 
-View [Vapor](https://github.com/qutheory/vapor) for documentation.
+View [Vapor](https://github.com/vapor/vapor) for documentation.
 
 ## Requirements
 
-Swift 3.0 preview 2 is required (Xcode 8 beta 2 on macOS). 
+Swift `DEVELOPMENT-SNAPSHOT-2016-07-25-a` is required (Xcode 8 beta 4 on macOS). 
+
+While a database is _not_ required to run this example, but it is encouraged to set up a MySQL database to test out Fluent. Set up your database under `Config/mysql.json`.
 
 Works on Ubuntu, Docker, Heroku, macOS.
 
@@ -37,13 +39,13 @@ Visit [Getting Started](http://docs.qutheory.io) in the documentation.
 
 If you have the [Vapor Toolbox](https://github.com/qutheory/vapor-toolbox), use `vapor new <project-name>` to create your new application.
 
-Then run `vapor build` and `vapor run`.
+Then run `vapor build --mysql` and `vapor run`.
 
-Otherwise, clone this repo and run `swift build` to compile your application, then run `.build/debug/App`.
+Otherwise, clone this repo and run `swift build -Xswiftc -I/usr/local/include/mysql -Xlinker -L/usr/local/lib` to compile your application, then run `.build/debug/App`.
 
 ### Xcode 8
 
-Run `vapor xcode` which will create the Xcode Project and open Xcode 8.
+Run `vapor xcode --mysql` which will create the Xcode Project and open Xcode 8.
 
 ![Xcode](https://cloud.githubusercontent.com/assets/1342803/15592631/3e740df8-2373-11e6-8624-3c89260322aa.png)
 
