@@ -26,37 +26,32 @@ a:hover {
 }
 
 div.wrapper {
+	
+}
+
+#posts {
 	width: 100%;
-	max-width: 600px;
-	margin: 0 auto;
-	position: relative;
-	top: 50%;
-	transform: translateY(-50%);
-	margin-top: -25px; //adjust eye level
 }
 
-h1#logo {
-	text-indent: -9999px;
-	background-image: url(../images/vapor-logo.png);
-	background-size: 100%;
-	width: 347.5px;
-	height: 84px;
-	margin: 0 auto;
+#posts tr:nth-child(even) {
+	background: #EEE;
 }
 
-nav.main {
-	text-align: center;
-	margin-top: 20px;
-}
-nav.main ul {
-	margin: 0;
-	padding: 0;
-}
-nav.main ul li {
-	display: inline-block;
-	padding: 0 5px;
+#posts tr:nth-child(odd) {
+	background: #FFF;
 }
 
+tr {
+	border: none;
+	padding: none;
+	margin: none;
+}
+
+td {
+	border: none;
+	padding: none;
+	margin: none;
+}
 
 footer.main {
 	position: absolute;
@@ -75,3 +70,4 @@ footer.main p {
 footer.main p a {
 	color: #ccc;
 }
+

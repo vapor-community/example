@@ -6,6 +6,7 @@ import HTTP
 
 /*
 TODO:
+Make the posts page pretty
 Make clear the user they don't need to setup a database
 Handle no database
 Make frontend for post board
