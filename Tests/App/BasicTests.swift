@@ -6,7 +6,8 @@ import URI
 
 final class BasicTests: XCTestCase {
     static let allTests = [
-       ("testPlaintext", testPlaintext)
+        ("testWelcome", testWelcome),
+        ("testPlaintext", testPlaintext)
     ]
 
     var basic: BasicController!
