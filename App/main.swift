@@ -1,21 +1,19 @@
 import Vapor
 import VaporMySQL
 import VaporMustache
+import Fluent
 import HTTP
 
 /*
 TODO:
 Make clear the user they don't need to setup a database
+Handle no database
 Make frontend for post board
 Database initiation instructions in README
 Make links for all this in index.html
-Add client example
+Add HTTP client example
 Websocket example
-SMTP documentation
-
-Plan:
-Anyone can post with username
-Any can reply with username
+SMTP example
 */
 
 // MARK: Droplet initiation
@@ -33,7 +31,10 @@ Any can reply with username
 	for our database.
 */
 // TODO: Describe preparations
-let drop = Droplet(preparations: [Post.self, User.self], providers: [VaporMustache.Provider.self, VaporMySQL.Provider.self])
+let drop = Droplet(
+	preparations: [Post.self, User.self],
+	providers: [VaporMustache.Provider.self, VaporMySQL.Provider.self]
+)
 
 /**
     Vapor configuration files are located
@@ -265,6 +266,34 @@ drop.get("db-version") { request in
 	return try JSON([
 		"version": version
 	])
+}
+
+drop.group("board") { board in
+	board.get("/") { request in
+		let posts = try Post.query().all()
+		return try drop.view("board.mustache", context: ["posts": posts])
+	}
+	
+	board.post("/post") { request in
+		guard let username = request.data["username"].string, let text = request.data["text"].string else {
+			return "Could not get username and text." // TODO: Error page? Mabye too complex?
+		}
+		
+		// Check if the user already exists
+		var user = try User.query().filter("name", .equals, username).first()
+		
+		// If not, create the user
+		if user == nil {
+			user = User(name: username)
+			try user?.save()
+		}
+		
+		// Create and save the post
+		var post = Post(text: text, user: user)
+		try post.save()
+		
+		return Response(redirect: "../board")
+	}
 }
 
 // MARK: Session

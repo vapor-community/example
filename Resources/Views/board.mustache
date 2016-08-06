@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Vapor Board</title>
+		
+		<link rel="stylesheet" href="styles/app.css">
+	</head>
+	<body>
+		<div class="wrapper">
+			<form action="board/post" method="post">
+				<input type="text" id="username" name="username">
+				<input type="text" id="text" name="text">
+				<br>
+				<input type="submit">
+			</form>
+			
+			<div>
+				{{#posts}}
+				{{text}}
+				{{/posts}}
+			</div>
+		</div>
+	</body>
+</html>
+

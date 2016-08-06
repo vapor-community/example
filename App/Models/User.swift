@@ -1,4 +1,5 @@
 import Vapor
+import Mustache
 import Fluent
 
 final class User: Model {
@@ -7,10 +8,10 @@ final class User: Model {
     
     init(name: String) {
 		// TODO: Describe
-        self.name = name
+        self.name = name // TODO: Validator
     }
 
-    init(node: Node, in context: Context) throws {
+    init(node: Node, in context: Vapor.Context) throws {
 		// TODO: Describe
         id = try node.extract("id")
         name = try node.extract("name")
@@ -23,15 +24,6 @@ final class User: Model {
             "name": name
         ])
     }
-	
-	func makeJSON() -> JSON {
-		// TODO: Note converting and overriding for clients
-		return try! JSON([
-			"id": try! JSON(node: id),
-			"name": name,
-			"post-count": try! postCount()
-		])
-	}
 
     static func prepare(_ database: Database) throws {
 		// TODO: Describe (entity is table name from reflection)
@@ -53,5 +45,32 @@ final class User: Model {
 	
 	func postCount() throws -> Int {
 		return try children(Post.self).all().count // TODO: Make more efficient?
+	}
+}
+
+extension User: MustacheBoxable {
+	var mustacheBox: MustacheBox {
+		return MustacheBox(
+			value: self,
+			boolValue: nil,
+			keyedSubscript: keyedSubscriptFunction,
+			filter: nil,
+			render: nil,
+			willRender: nil,
+			didRender: nil
+		)
+	}
+	
+	func keyedSubscriptFunction(key: String) -> MustacheBox {
+		switch key {
+		case "id":
+			return (id?.int?.mustacheBox)!
+		case "name":
+			return name.mustacheBox
+		case "post-count":
+			return try! postCount().mustacheBox
+		default:
+			return Box()
+		}
 	}
 }
