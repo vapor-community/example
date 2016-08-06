@@ -1,16 +1,39 @@
 import Vapor
+import VaporMySQL
 import VaporMustache
+import Fluent
 import HTTP
 
+/*
+	TODO:
+	 - Link to these webpages in the template.mustache
+	 - Make the board page pretty
+	 - Database initiation instructions in README
+	 - Make links for all this in index.html
+	 - Add HTTP client example
+	 - Websocket example
+	 - SMTP example
+*/
 
+// MARK: Droplet initiation
 /**
     Droplets are service containers that make accessing
     all of Vapor's features easy. Just call
     `drop.serve()` to serve your application
     or `drop.client()` to create a client for
     request data from other servers.
+
+	As you can see, the droplet is given two providers. A
+	provider gives a way for adding functionality from
+	third party packages to Vapor. Here, we set up
+	VaporMustache for rendering views and VaporMySQL
+	for our database.
 */
-let drop = Droplet(providers: [VaporMustache.Provider.self])
+// TODO: Describe preparations
+let drop = Droplet(
+	preparations: [Post.self, User.self],
+	providers: [VaporMustache.Provider.self, VaporMySQL.Provider.self]
+)
 
 /**
     Vapor configuration files are located
@@ -25,6 +48,7 @@ let drop = Droplet(providers: [VaporMustache.Provider.self])
 */
 let _ = drop.config["app", "key"].string ?? ""
 
+// MARK: Routing
 /**
     This first route will return the welcome.html
     view to any request to the root directory of the website.
@@ -40,15 +64,82 @@ drop.get("/") { request in
 }
 
 /**
-    Return JSON requests easy by wrapping
+	Here's an example of using type-safe routing to ensure
+	only requests to "math/<some-float>" will be handled.
+
+	String is the most general and will match any request
+	to "route/<some-string>".
+
+	Vapor currently limits you to three path components.
+	When you need more than three path components,
+	consider using a group.
+*/
+drop.get("math", Int.self) { request, number in
+	return try JSON([
+		"number":      number,
+		"number * 2":  number * 2,
+		"number / 2":  number / 2,
+		"number << 2": number << 2
+		])
+}
+
+/**
+	Any type that conforms to `StringInitializable` can be used
+	as a type-safe routing parameter. The `User` model included
+	in this example is `StringInitializable`, so it can be
+	used as a parameter.
+*/
+drop.get("user", User.self) { request, user in
+	return try JSON([
+		"success": true,
+		"user": user
+		])
+}
+
+/**
+	Vapor allows your program to group requests together
+	for easily adding common prefixes, middleware, or host
+	multiple routes.
+*/
+drop.group("magic") { magic in
+	magic.get("/") { request in
+		return try JSON([
+			"abracadabra": "✨ 🎩🐰 ✨"
+			])
+	}
+	
+	magic.get("encore") { request in
+		return try JSON([
+			"tada": "✨ 👱🔪⚰👣 ✨"
+			])
+	}
+}
+
+/**
+	This will set up the appropriate GET, PUT, and POST
+	routes for basic CRUD operations. Check out the
+	UserController in App/Controllers to see more.
+
+	Controllers are also type-safe, with their types being
+	defined by which StringInitializable class they choose
+	to receive as parameters to their functions.
+*/
+
+let users = UserController(droplet: drop)
+drop.resource("users", users)
+
+// MARK: Data
+/**
+    As you may have already noticed, you can
+	make JSON responses easily by wrapping
     any JSON data type (String, Int, Dict, etc)
-    in JSON() and returning it.
+    in `JSON()` and returning it.
 
     Types can be made convertible to JSON by 
-    conforming to JsonRepresentable. The User
+    conforming to `JsonRepresentable`. The User
     model included in this example demonstrates this.
 
-    By conforming to JsonRepresentable, you can pass
+    By conforming to `JsonRepresentable`, you can pass
     the data structure into any JSON data as if it
     were a native JSON data type.
 */
@@ -64,6 +155,14 @@ drop.get("json") { request in
             "lang": "Swift"
         ])
     ])
+}
+
+/**
+	This simple plaintext response is useful
+	when benchmarking Vapor.
+*/
+drop.get("plaintext") { request in
+	return "Hello, World!"
 }
 
 /**
@@ -95,44 +194,19 @@ drop.get("data", Int.self) { request, int in
     ])
 }
 
-/**
-    Here's an example of using type-safe routing to ensure 
-    only requests to "posts/<some-integer>" will be handled.
-
-    String is the most general and will match any request
-    to "posts/<some-string>". To make your data structure
-    work with type-safe routing, make it StringInitializable.
-
-    The User model included in this example is StringInitializable.
-*/
-drop.get("posts", Int.self) { request, postId in
-    return "Requesting post with ID \(postId)"
-}
-
-/**
-    This will set up the appropriate GET, PUT, and POST
-    routes for basic CRUD operations. Check out the
-    UserController in App/Controllers to see more.
-
-    Controllers are also type-safe, with their types being
-    defined by which StringInitializable class they choose
-    to receive as parameters to their functions.
-*/
-
-let users = UserController(droplet: drop)
-drop.resource("users", users)
-
+// MARK: Views
 /**
     VaporMustache hooks into Vapor's view class to
     allow rendering of Mustache templates. You can
     even reference included files setup through the provider.
 */
-drop.get("mustache") { request in
+drop.get("mustache") { request in // TODO: Giving a server error `Server error: dispatch(HTTP.ParserError.streamEmpty)`
     return try drop.view("template.mustache", context: [
         "greeting": "Hello, world!"
     ])
 }
 
+// MARK: Validation
 /**
     A custom validator definining what
     constitutes a valid name. Here it is 
@@ -166,7 +240,7 @@ class Employee {
 
 /**
     Allows any instance of employee
-    to be returned as Json
+    to be returned as JSON
 */
 extension Employee: JSONRepresentable {
     func makeJSON() throws -> JSON {
@@ -177,19 +251,98 @@ extension Employee: JSONRepresentable {
     }
 }
 
-// Temporarily unavailable
+// TODO: Temporarily unavailable
 //drop.any("validation") { request in
 //    return try Employee(request: request)
 //}
 
+// MARK: Databse
 /**
-    This simple plaintext response is useful
-    when benchmarking Vapor.
+	Vapor provides a built-in Simple ActiveRecord
+	implmentation called Fluent. This provides a
+	a fast and powerful way to interface with a database
+	inside your webserver.
 */
-drop.get("plaintext") { request in
-    return "Hello, World!"
+
+let noDatabaseMessage = "Your database is not set up. Please see the README.md."
+
+/**
+	This provides an endpoint to check that your datbase
+	is working and what version it's running.
+*/
+drop.get("db-version") { request in
+	guard let database = drop.database else {
+		return noDatabaseMessage
+	}
+	
+	guard let version = try database.driver.raw("SELECT @@version AS version")[0].object?["version"].string else {
+		return try JSON(["error": "Could not get database version."])
+	}
+	
+	return try JSON([
+		"version": version
+	])
 }
 
+// MARK: Board
+/**
+	Here, we create a group to manage the board, a 
+	very basic forum-style site where anyone can post
+	anything.
+*/
+drop.group("board") { board in
+	/**
+		At the root, the board view is rendered with the items
+		on the board and a form to post new items.
+	*/
+	board.get("/") { request in
+		// Check there is a datbase
+		guard let database = drop.database else {
+			return noDatabaseMessage
+		}
+		
+		// Get all the posts
+		let posts = try Post.query().all()
+		
+		// Render the board with all the posts
+		return try drop.view("board.mustache", context: ["posts": posts])
+	}
+	
+	/**
+		This endpoint is hit by the client using the form at
+		/boards. When the request is complete, it redirects
+		to /boards.
+	*/
+	board.post("/post") { request in
+		// Check there is a database
+		guard let database = drop.database else {
+			return noDatabaseMessage
+		}
+		
+		// Get the reqeuest data
+		guard let username = request.data["username"].string, let text = request.data["text"].string else {
+			return "Could not get username and text." // TODO: Error page? Mabye too complex?
+		}
+		
+		// Fetch any user with the username
+		var user = try User.query().filter("name", .equals, username).first()
+		
+		// If none exists, create the user
+		if user == nil {
+			user = User(name: username)
+			try user?.save()
+		}
+		
+		// Create and save the post
+		var post = Post(text: text, user: user)
+		try post.save()
+		
+		// Reidrect to /board
+		return Response(redirect: "../board")
+	}
+}
+
+// MARK: Session
 /**
     Vapor automatically handles setting
     and retreiving sessions. Simply add data to
@@ -210,6 +363,7 @@ drop.get("session") { request in
     return response
 }
 
+// MARK: Misc
 /**
     Add Localization to your app by creating
     a `Localization` folder in the root of your
@@ -230,6 +384,25 @@ drop.get("localization", String.self) { request, lang in
     ])
 }
 
+/**
+	Vapor makes hashing strings easy. This is great
+	for things like securely storing passwords.
+
+	You can also change the default hasher like:
+
+	let sha512 = SHA2Hasher(variant: .sha512)
+	let drop = Droplet(hash: sha512)
+
+	Additionally, you can create your own hasher
+	simply by conforming to the `Hash` protocol.
+*/
+drop.get("hash", String.self) { request, hashValue in
+	return try JSON([
+		"hashed": drop.hash.make(hashValue)
+	])
+}
+
+// MARK: Serve
 /**
     Middleware is a great place to filter 
     and modifying incoming requests and outgoing responses. 

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Vapor Board</title>
+
+		<link rel="stylesheet" href="styles/board.css">
+	</head>
+	<body>
+		<div class="wrapper">
+			<table id="posts">
+				<thead>
+					<th>Username</th>
+					<th>Text</th>
+				</thead>
+				<tbody>
+					{{#posts}}
+					<tr>
+						<td>
+							<span class="username">{{user.name}}</span>
+							<span class="post-count">{{user.post-count}}</span>
+						</td>
+						<td>
+							<p class="post-text">{{text}}</p>
+						</td>
+					</tr>
+					{{/posts}}
+				</tbody>
+			</table>
+
+			<form class="submit-form" action="board/post" method="post">
+				<input type="text" id="username-input" name="username" placeholder="Username..."><br/>
+				<textarea id="text-input" id="text" name="text" placeholder="Text..."></textarea>
+				<button type="submit">Post</button>
+			</form>
+		</div>
+	</body>
+</html>
