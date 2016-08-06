@@ -129,6 +129,25 @@ drop.get("user", User.self) { request, user in
 }
 
 /**
+	Vapor allows your program to group requests together
+	for easily adding common prefixes, middleware, or host
+	multiple routes.
+*/
+drop.group("magic") { magic in
+	magic.get("/") { request in
+		return try JSON([
+			"abracadabra": "✨ 🎩🐰 ✨"
+		])
+	}
+	
+	magic.get("encore") { request in
+		return try JSON([
+			"tada": "✨ 👱🔪⚰👣 ✨"
+		])
+	}
+}
+
+/**
     This will set up the appropriate GET, PUT, and POST
     routes for basic CRUD operations. Check out the
     UserController in App/Controllers to see more.
@@ -146,7 +165,7 @@ drop.resource("users", users)
     allow rendering of Mustache templates. You can
     even reference included files setup through the provider.
 */
-drop.get("mustache") { request in
+drop.get("mustache") { request in // TODO: Giving a server error `Server error: dispatch(HTTP.ParserError.streamEmpty)`
     return try drop.view("template.mustache", context: [
         "greeting": "Hello, world!"
     ])
@@ -196,7 +215,7 @@ extension Employee: JSONRepresentable {
     }
 }
 
-// Temporarily unavailable
+// TODO: Temporarily unavailable
 //drop.any("validation") { request in
 //    return try Employee(request: request)
 //}
