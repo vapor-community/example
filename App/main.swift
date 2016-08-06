@@ -1,4 +1,5 @@
 import Vapor
+import VaporMySQL
 import VaporMustache
 import HTTP
 
