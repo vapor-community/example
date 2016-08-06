@@ -5,13 +5,14 @@ import Fluent
 import HTTP
 
 /*
-TODO:
-Make the board page pretty
-Database initiation instructions in README
-Make links for all this in index.html
-Add HTTP client example
-Websocket example
-SMTP example
+	TODO:
+	 - Link to these webpages in the template.mustache
+	 - Make the board page pretty
+	 - Database initiation instructions in README
+	 - Make links for all this in index.html
+	 - Add HTTP client example
+	 - Websocket example
+	 - SMTP example
 */
 
 // MARK: Droplet initiation
