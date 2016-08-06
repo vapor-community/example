@@ -5,6 +5,8 @@ import HTTP
 
 /*
 TODO:
+Make clear the user they don't need to setup a database
+Make frontend for post board
 Database initiation instructions in README
 Make links for all this in index.html
 Add client example
@@ -30,7 +32,8 @@ Any can reply with username
 	VaporMustache for rendering views and VaporMySQL
 	for our database.
 */
-let drop = Droplet(providers: [VaporMustache.Provider.self, VaporMySQL.Provider.self])
+// TODO: Describe preparations
+let drop = Droplet(preparations: [Post.self, User.self], providers: [VaporMustache.Provider.self, VaporMySQL.Provider.self])
 
 /**
     Vapor configuration files are located
