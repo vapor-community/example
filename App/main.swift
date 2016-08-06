@@ -3,7 +3,14 @@ import VaporMySQL
 import VaporMustache
 import HTTP
 
+// TODO: This main.swift file is getting a tad big. Maybe we should break it down into collections?
 
+/**
+
+*/
+
+
+// MARK: Initiation
 /**
     Droplets are service containers that make accessing
     all of Vapor's features easy. Just call
@@ -26,6 +33,7 @@ let drop = Droplet(providers: [VaporMustache.Provider.self])
 */
 let _ = drop.config["app", "key"].string ?? ""
 
+// MARK: Routing
 /**
     This first route will return the welcome.html
     view to any request to the root directory of the website.
@@ -41,15 +49,82 @@ drop.get("/") { request in
 }
 
 /**
-    Return JSON requests easy by wrapping
+	Here's an example of using type-safe routing to ensure
+	only requests to "math/<some-float>" will be handled.
+
+	String is the most general and will match any request
+	to "route/<some-string>".
+
+	Vapor currently limits you to three path components.
+	When you need more than three path components,
+	consider using a group.
+*/
+drop.get("math", Int.self) { request, number in
+	return try JSON([
+		"number":      number,
+		"number * 2":  number * 2,
+		"number / 2":  number / 2,
+		"number << 2": number << 2
+		])
+}
+
+/**
+	Any type that conforms to `StringInitializable` can be used
+	as a type-safe routing parameter. The `User` model included
+	in this example is `StringInitializable`, so it can be
+	used as a parameter.
+*/
+drop.get("user", User.self) { request, user in
+	return try JSON([
+		"success": true,
+		"user": user
+		])
+}
+
+/**
+	Vapor allows your program to group requests together
+	for easily adding common prefixes, middleware, or host
+	multiple routes.
+*/
+drop.group("magic") { magic in
+	magic.get("/") { request in
+		return try JSON([
+			"abracadabra": "✨ 🎩🐰 ✨"
+			])
+	}
+	
+	magic.get("encore") { request in
+		return try JSON([
+			"tada": "✨ 👱🔪⚰👣 ✨"
+			])
+	}
+}
+
+/**
+	This will set up the appropriate GET, PUT, and POST
+	routes for basic CRUD operations. Check out the
+	UserController in App/Controllers to see more.
+
+	Controllers are also type-safe, with their types being
+	defined by which StringInitializable class they choose
+	to receive as parameters to their functions.
+*/
+
+let users = UserController(droplet: drop)
+drop.resource("users", users)
+
+// MARK: Data
+/**
+    As you may have already noticed, you can
+	make JSON responses easily by wrapping
     any JSON data type (String, Int, Dict, etc)
-    in JSON() and returning it.
+    in `JSON()` and returning it.
 
     Types can be made convertible to JSON by 
-    conforming to JsonRepresentable. The User
+    conforming to `JsonRepresentable`. The User
     model included in this example demonstrates this.
 
-    By conforming to JsonRepresentable, you can pass
+    By conforming to `JsonRepresentable`, you can pass
     the data structure into any JSON data as if it
     were a native JSON data type.
 */
@@ -65,6 +140,14 @@ drop.get("json") { request in
             "lang": "Swift"
         ])
     ])
+}
+
+/**
+	This simple plaintext response is useful
+	when benchmarking Vapor.
+*/
+drop.get("plaintext") { request in
+	return "Hello, World!"
 }
 
 /**
@@ -96,71 +179,7 @@ drop.get("data", Int.self) { request, int in
     ])
 }
 
-/**
-	Here's an example of using type-safe routing to ensure
-	only requests to "math/<some-float>" will be handled.
-
-	String is the most general and will match any request
-	to "route/<some-string>".
-
-	Vapor currently limits you to three path components.
-	When you need more than three path components,
-	consider using a group.
-*/
-drop.get("math", Int.self) { request, number in
-	return try JSON([
-		"number":      number,
-		"number * 2":  number * 2,
-		"number / 2":  number / 2,
-		"number << 2": number << 2
-	])
-}
-
-/**
-	Any type that conforms to `StringInitializable` can be used
-	as a type-safe routing parameter. The `User` model included
-	in this example is `StringInitializable`, so it can be
-	used as a parameter.
-*/
-drop.get("user", User.self) { request, user in
-	return try JSON([
-		"success": true,
-		"user": user
-	])
-}
-
-/**
-	Vapor allows your program to group requests together
-	for easily adding common prefixes, middleware, or host
-	multiple routes.
-*/
-drop.group("magic") { magic in
-	magic.get("/") { request in
-		return try JSON([
-			"abracadabra": "✨ 🎩🐰 ✨"
-		])
-	}
-	
-	magic.get("encore") { request in
-		return try JSON([
-			"tada": "✨ 👱🔪⚰👣 ✨"
-		])
-	}
-}
-
-/**
-    This will set up the appropriate GET, PUT, and POST
-    routes for basic CRUD operations. Check out the
-    UserController in App/Controllers to see more.
-
-    Controllers are also type-safe, with their types being
-    defined by which StringInitializable class they choose
-    to receive as parameters to their functions.
-*/
-
-let users = UserController(droplet: drop)
-drop.resource("users", users)
-
+// MARK: Views
 /**
     VaporMustache hooks into Vapor's view class to
     allow rendering of Mustache templates. You can
@@ -172,6 +191,7 @@ drop.get("mustache") { request in // TODO: Giving a server error `Server error: 
     ])
 }
 
+// MARK: Validation
 /**
     A custom validator definining what
     constitutes a valid name. Here it is 
@@ -221,14 +241,7 @@ extension Employee: JSONRepresentable {
 //    return try Employee(request: request)
 //}
 
-/**
-    This simple plaintext response is useful
-    when benchmarking Vapor.
-*/
-drop.get("plaintext") { request in
-    return "Hello, World!"
-}
-
+// MARK: Session
 /**
     Vapor automatically handles setting
     and retreiving sessions. Simply add data to
@@ -249,6 +262,7 @@ drop.get("session") { request in
     return response
 }
 
+// MARK: Misc
 /**
     Add Localization to your app by creating
     a `Localization` folder in the root of your
@@ -287,6 +301,7 @@ drop.get("hash", String.self) { request, hashValue in
 	])
 }
 
+// MARK: Serve
 /**
     Middleware is a great place to filter 
     and modifying incoming requests and outgoing responses. 
