@@ -1,5 +1,5 @@
 {
-	"production": {
-		"port": "$PORT"
-	}
+    "production": {
+        "port": "$PORT"
+    }
 }

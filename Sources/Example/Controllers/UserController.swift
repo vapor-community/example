@@ -23,8 +23,8 @@ public final class UserController: ResourceRepresentable {
     }
 
     /**
-    	Since item is of type User,
-    	only instances of user will be received
+        Since item is of type User,
+        only instances of user will be received
     */
     func show(request: Request, item user: User) throws -> ResponseRepresentable {
         //User can be used like JSON with JsonRepresentable

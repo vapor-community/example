@@ -25,7 +25,6 @@ public final class Application {
         */
         let drop = Droplet(
             arguments: args,
-            preparations: preparations,
             providers: providers
         )
 

@@ -19,7 +19,7 @@ final class BasicTests: XCTestCase {
 
     override func setUp() {
         drop = Droplet(arguments: ["--env=testing"])
-    	basic = BasicController(droplet: drop)
+        basic = BasicController(droplet: drop)
     }
 
     func testWelcome() throws {
@@ -28,7 +28,7 @@ final class BasicTests: XCTestCase {
     }
 
     func testPlaintext() throws {
-    	let response = try basic.plaintext(Request())
+        let response = try basic.plaintext(Request())
         XCTAssertEqual(try response.bodyString(), "Hello, world!")
     }
 }

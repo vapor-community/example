@@ -16,10 +16,6 @@ extension Application {
         drop.get("user", User.self, handler: json.user)
         drop.get("json", handler: json.json)
 
-        // MARK: Board
-        let board = BoardController(droplet: drop)
-        drop.resource("board", board)
-
 
         //MARK: Magic
         /**
@@ -52,26 +48,5 @@ extension Application {
         let misc = MiscController(droplet: drop)
         let miscCollection = MiscCollection(misc)
         drop.collection(miscCollection)
-
-        // MARK: Databse
-        /**
-            Here is an example of a route without a controller.
-
-            This provides an endpoint to check that your datbase
-            is working and what version it's running.
-        */
-        drop.get("db-version") { request in
-            guard let database = drop.database else {
-                return "Your database is not set up. Please see the README.md."
-            }
-            
-            guard let version = try database.driver.raw("SELECT @@version AS version")[0].object?["version"].string else {
-                return try JSON(["error": "Could not get database version."])
-            }
-            
-            return try JSON([
-                "version": version
-            ])
-        }
     }
 }

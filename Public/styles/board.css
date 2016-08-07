@@ -1,73 +1,73 @@
 * {
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body, html {
-	padding: 0;
-	margin: 0;
-	height: 100%;
+    padding: 0;
+    margin: 0;
+    height: 100%;
 }
 
 body {
-	font-family: sans-serif;
-	color: #333;
-	position: relative;
+    font-family: sans-serif;
+    color: #333;
+    position: relative;
 }
 
 
 a {
-	color: #92A8D1;
-	text-decoration: none;
-	border-bottom: 1px dotted;
+    color: #92A8D1;
+    text-decoration: none;
+    border-bottom: 1px dotted;
 }
 
 a:hover {
-	color: #F7CAC9;
+    color: #F7CAC9;
 }
 
 div.wrapper {
-	
+    
 }
 
 #posts {
-	width: 100%;
+    width: 100%;
 }
 
 #posts tr:nth-child(even) {
-	background: #EEE;
+    background: #EEE;
 }
 
 #posts tr:nth-child(odd) {
-	background: #FFF;
+    background: #FFF;
 }
 
 tr {
-	border: none;
-	padding: none;
-	margin: none;
+    border: none;
+    padding: none;
+    margin: none;
 }
 
 td {
-	border: none;
-	padding: none;
-	margin: none;
+    border: none;
+    padding: none;
+    margin: none;
 }
 
 footer.main {
-	position: absolute;
-	width: 100%;
-	text-align: center;
-	bottom: 10px;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    bottom: 10px;
 }
 
 footer.main p {
-	margin: 0;
-	padding: 0;
-	color: #ccc;
-	font-weight: 300;
+    margin: 0;
+    padding: 0;
+    color: #ccc;
+    font-weight: 300;
 }
 
 footer.main p a {
-	color: #ccc;
+    color: #ccc;
 }
 
