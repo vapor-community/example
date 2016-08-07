@@ -7,23 +7,23 @@ import HTTP
     anything.
 */
 public final class BoardController {
-	let drop: Droplet
+    let drop: Droplet
 
-	public init(droplet: Droplet) {
-		drop = droplet
-	}
+    public init(droplet: Droplet) {
+        drop = droplet
+    }
 
-	/**
-		At the root, the board view is rendered with the items
-		on the board and a form to post new items.
-	*/
-	public func index(_ request: Request) throws -> ResponseRepresentable {
+    /**
+        At the root, the board view is rendered with the items
+        on the board and a form to post new items.
+    */
+    public func index(_ request: Request) throws -> ResponseRepresentable {
         // Get all the posts
         let posts = try Post.query().all()
         
         // Render the board with all the posts
         return try drop.view("board.mustache", context: ["posts": posts])
-	}
+    }
             
     /**
         This endpoint is hit by the client using the form at
@@ -55,7 +55,7 @@ public final class BoardController {
 }
 
 extension BoardController: ResourceRepresentable {
-	public func makeResource() -> Resource<String> {
-		return Resource(index: index, store: store)
-	}
+    public func makeResource() -> Resource<String> {
+        return Resource(index: index, store: store)
+    }
 }

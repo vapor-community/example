@@ -3,8 +3,8 @@ import HTTP
 import Routing
 
 extension Application {
-	public func routes(_ drop: Droplet) {
-		// MARK: Basic
+    public func routes(_ drop: Droplet) {
+        // MARK: Basic
         let basic = BasicController(droplet: drop)
         drop.get(handler: basic.welcome)
         drop.get("plaintext", handler: basic.plaintext)
@@ -46,8 +46,8 @@ extension Application {
 
 
         /**
-			Route collections help break routing up into different
-			files. This route collection takes a controller.
+            Route collections help break routing up into different
+            files. This route collection takes a controller.
         */
         let misc = MiscController(droplet: drop)
         let miscCollection = MiscCollection(misc)
@@ -73,5 +73,5 @@ extension Application {
                 "version": version
             ])
         }
-	}
+    }
 }

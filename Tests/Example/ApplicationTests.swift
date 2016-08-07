@@ -1,8 +1,6 @@
 import XCTest
 @testable import Example
-import Vapor
 import HTTP
-import URI
 
 /**
     These are Application wide tests.

@@ -3,10 +3,10 @@ import HTTP
 import Routing
 
 class MiscCollection: RouteCollection {
-	let misc: MiscController
-	init(_ controller: MiscController) {
-		misc = controller
-	}
+    let misc: MiscController
+    init(_ controller: MiscController) {
+        misc = controller
+    }
 
     typealias Wrapped = HTTP.Responder
     func build<B: RouteBuilder where B.Value == Wrapped>(_ builder: B) {

@@ -1,9 +1,9 @@
 import Vapor
 
 extension Application {
-	public var middleware: [Middleware] {
-		return [
-			SampleMiddleware()
-		]
-	}
+    public var middleware: [Middleware] {
+        return [
+            SampleMiddleware()
+        ]
+    }
 }
