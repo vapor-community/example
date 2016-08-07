@@ -1,11 +1,12 @@
 import Vapor
 import HTTP
 
-final class UserController: ResourceRepresentable {
+// TODO: Make this actually show users
+public final class UserController: ResourceRepresentable {
     typealias Item = User
 
     let drop: Droplet
-    init(droplet: Droplet) {
+    public init(droplet: Droplet) {
         drop = droplet
     }
     
@@ -22,8 +23,8 @@ final class UserController: ResourceRepresentable {
     }
 
     /**
-    	Since item is of type User,
-    	only instances of user will be received
+        Since item is of type User,
+        only instances of user will be received
     */
     func show(request: Request, item user: User) throws -> ResponseRepresentable {
         //User can be used like JSON with JsonRepresentable
@@ -43,7 +44,7 @@ final class UserController: ResourceRepresentable {
         return user
     }
 
-    func makeResource() -> Resource<User> {
+    public func makeResource() -> Resource<User> {
         return Resource(
             index: index,
             store: store,
