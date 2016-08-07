@@ -1,0 +1,25 @@
+import XCTest
+@testable import Example
+import Vapor
+import HTTP
+import URI
+
+/**
+    These are Application wide tests.
+*/
+final class ApplicationTests: XCTestCase {
+    static let allTests = [
+        ("testBasic", testBasic)
+    ]
+
+    var app: Application!
+
+    override func setUp() {
+        app = Application()
+    }
+
+    func testBasic() throws {
+        let response = try app.respond(to: Request(method: .get, path: "/plaintext"))
+        XCTAssertEqual(try response.bodyString(), "Hello, world!")
+    }
+}

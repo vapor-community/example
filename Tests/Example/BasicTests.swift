@@ -1,9 +1,13 @@
 import XCTest
-@testable import App
+@testable import Example
 import Vapor
 import HTTP
 import URI
 
+/**
+    These are controller specific tests
+    concerning the `BasicController`.
+*/
 final class BasicTests: XCTestCase {
     static let allTests = [
         ("testWelcome", testWelcome),

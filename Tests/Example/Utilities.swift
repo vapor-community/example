@@ -1,9 +1,11 @@
 import HTTP
 import URI
 import Transport
+import Example
 
 enum HTTPTestError: Error {
     case invalidBodyType
+    case noDroplet
 }
 
 extension Request {
@@ -21,5 +23,15 @@ extension ResponseRepresentable {
         default:
             throw HTTPTestError.invalidBodyType
         }
+    }
+}
+
+extension Application: Responder {
+    public func respond(to request: Request) throws -> Response {
+        guard let drop = self.drop else {
+            throw HTTPTestError.noDroplet
+        }
+
+        return try drop.respond(to: request)
     }
 }

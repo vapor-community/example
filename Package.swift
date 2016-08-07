@@ -3,8 +3,8 @@ import PackageDescription
 let package = Package(
     name: "VaporApp",
     targets: [
-        Target(name: "App"),
-        Target(name: "Run", dependencies: ["App"])
+        Target(name: "Example"),
+        Target(name: "App", dependencies: ["Example"])
     ],
     dependencies: [
         .Package(url: "https://github.com/vapor/vapor.git", majorVersion: 0, minor: 16),
