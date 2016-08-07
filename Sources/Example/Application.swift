@@ -8,7 +8,14 @@ import HTTP
 public final class Application {
     public var drop: Droplet?
 
-    public init() {
+    public init(testing: Bool = false) {
+        var args = Process.arguments
+        if testing {
+            // simulate passing `--env=testing` from the 
+            // command line if testing is true.
+            args.append("--env=testing")
+        }
+
         /**
             Droplets are service containers that make accessing
             all of Vapor's features easy. Just call
@@ -16,7 +23,11 @@ public final class Application {
             or `drop.client()` to create a client for
             request data from other servers.
         */
-        let drop = Droplet(preparations: preparations, providers: providers)
+        let drop = Droplet(
+            arguments: args,
+            preparations: preparations,
+            providers: providers
+        )
 
         /**
             Passes the Droplet to have routes added from the routes folder.

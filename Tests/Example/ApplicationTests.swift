@@ -15,7 +15,7 @@ final class ApplicationTests: XCTestCase {
     var app: Application!
 
     override func setUp() {
-        app = Application()
+        app = Application(testing: true)
     }
 
     func testBasic() throws {
