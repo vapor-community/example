@@ -13,7 +13,6 @@ public final class User: Model {
 }
 
 // MARK: Node Conversions
-
 extension User {
     public convenience init(node: Node, in context: Vapor.Context) throws {
         self.init(
@@ -27,17 +26,5 @@ extension User {
             "id": id,
             "name": name
         ])
-    }
-}
-
-// MARK: Relations
-
-extension User {
-    func posts() -> Children<Post> {
-        return children(Post.self)
-    }
-    
-    func postCount() throws -> Int {
-        return try children(Post.self).all().count // TODO: Make more efficient? Raw query?
     }
 }

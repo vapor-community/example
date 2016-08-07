@@ -1,9 +1,0 @@
-{
-	"__comment": "This will need to be altered for production.",
-	"host": "127.0.0.1",
-	"user": "root",
-	"password": "",
-	"database": "vapor_example",
-	"port": 3306,
-	"flag": 0
-}

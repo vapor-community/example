@@ -1,8 +1,0 @@
-{
-    "host": "localhost",
-    "user": "testing",
-    "password": "testing",
-    "database": "vapor_example_testing",
-    "port": 3306,
-    "flag": 0
-}
