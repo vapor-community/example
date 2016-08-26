@@ -1,0 +1,3 @@
+#embed("includes/header")
+
+<h1>#(greeting)</h1>

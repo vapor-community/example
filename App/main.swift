@@ -1,5 +1,4 @@
 import Vapor
-import VaporMustache
 import HTTP
 
 
@@ -10,7 +9,7 @@ import HTTP
     or `drop.client()` to create a client for
     request data from other servers.
 */
-let drop = Droplet(providers: [VaporMustache.Provider.self])
+let drop = Droplet()
 
 /**
     Vapor configuration files are located
@@ -36,7 +35,7 @@ let _ = drop.config["app", "key"].string ?? ""
     --workDir to the application upon execution.
 */
 drop.get("/") { request in
-    return try drop.view("welcome.html")
+    return try drop.view.make("welcome")
 }
 
 /**
@@ -122,13 +121,8 @@ drop.get("posts", Int.self) { request, postId in
 let users = UserController(droplet: drop)
 drop.resource("users", users)
 
-/**
-    VaporMustache hooks into Vapor's view class to
-    allow rendering of Mustache templates. You can
-    even reference included files setup through the provider.
-*/
-drop.get("mustache") { request in
-    return try drop.view("template.mustache", context: [
+drop.get("leaf") { request in
+    return try drop.view.make("template", [
         "greeting": "Hello, world!"
     ])
 }
