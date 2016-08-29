@@ -2,6 +2,13 @@ import Vapor
 import VaporMustache
 import HTTP
 
+/**
+    Mustache partial templates (includes) must be specified ahead.
+*/
+let mustache = VaporMustache.Provider(withIncludes: [
+    "header": "Includes/header.mustache"
+])
+
 
 /**
     Droplets are service containers that make accessing
@@ -10,7 +17,7 @@ import HTTP
     or `drop.client()` to create a client for
     request data from other servers.
 */
-let drop = Droplet(providers: [VaporMustache.Provider.self])
+let drop = Droplet(initializedProviders: [mustache])
 
 /**
     Vapor configuration files are located
@@ -30,7 +37,7 @@ let _ = drop.config["app", "key"].string ?? ""
     view to any request to the root directory of the website.
 
     Views referenced with `app.view` are by default assumed
-    to live in <workDir>/Resources/Views/ 
+    to live in <workDir>/Resources/Views/
 
     You can override the working directory by passing
     --workDir to the application upon execution.
@@ -44,7 +51,7 @@ drop.get("/") { request in
     any JSON data type (String, Int, Dict, etc)
     in JSON() and returning it.
 
-    Types can be made convertible to JSON by 
+    Types can be made convertible to JSON by
     conforming to JsonRepresentable. The User
     model included in this example demonstrates this.
 
@@ -96,7 +103,7 @@ drop.get("data", Int.self) { request, int in
 }
 
 /**
-    Here's an example of using type-safe routing to ensure 
+    Here's an example of using type-safe routing to ensure
     only requests to "posts/<some-integer>" will be handled.
 
     String is the most general and will match any request
@@ -135,7 +142,7 @@ drop.get("mustache") { request in
 
 /**
     A custom validator definining what
-    constitutes a valid name. Here it is 
+    constitutes a valid name. Here it is
     defined as an alphanumeric string that
     is between 5 and 20 characters.
 */
@@ -231,13 +238,13 @@ drop.get("localization", String.self) { request, lang in
 }
 
 /**
-    Middleware is a great place to filter 
-    and modifying incoming requests and outgoing responses. 
+    Middleware is a great place to filter
+    and modifying incoming requests and outgoing responses.
 
     Check out the middleware in App/Middleware.
 
     You can also add middleware to a single route by
-    calling the routes inside of `app.middleware(MiddlewareType) { 
+    calling the routes inside of `app.middleware(MiddlewareType) {
         app.get() { ... }
     }`
 */
