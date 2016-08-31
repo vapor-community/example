@@ -1,7 +1,6 @@
 import Vapor
 import HTTP
 
-
 /**
     Droplets are service containers that make accessing
     all of Vapor's features easy. Just call
@@ -22,20 +21,20 @@ let drop = Droplet()
 
     Read the docs to learn more
 */
-let _ = drop.config["app", "key"].string ?? ""
+let _ = drop.config["app", "key"]?.string ?? ""
 
 /**
     This first route will return the welcome.html
     view to any request to the root directory of the website.
 
     Views referenced with `app.view` are by default assumed
-    to live in <workDir>/Resources/Views/ 
+    to live in <workDir>/Resources/Views/
 
     You can override the working directory by passing
     --workDir to the application upon execution.
 */
 drop.get("/") { request in
-    return try drop.view.make("welcome")
+    return try drop.view.make("welcome.html")
 }
 
 /**
@@ -43,7 +42,7 @@ drop.get("/") { request in
     any JSON data type (String, Int, Dict, etc)
     in JSON() and returning it.
 
-    Types can be made convertible to JSON by 
+    Types can be made convertible to JSON by
     conforming to JsonRepresentable. The User
     model included in this example demonstrates this.
 
@@ -52,13 +51,13 @@ drop.get("/") { request in
     were a native JSON data type.
 */
 drop.get("json") { request in
-    return try JSON([
+    return try JSON(node: [
         "number": 123,
         "string": "test",
-        "array": try JSON([
+        "array": try JSON(node: [
             0, 1, 2, 3
         ]),
-        "dict": try JSON([
+        "dict": try JSON(node: [
             "name": "Vapor",
             "lang": "Swift"
         ])
@@ -88,14 +87,14 @@ drop.get("json") { request in
     - MultiPart: request.data.multipart
 */
 drop.get("data", Int.self) { request, int in
-    return try JSON([
+    return try JSON(node: [
         "int": int,
-        "name": request.data["name"].string ?? "no name"
+        "name": request.data["name"]?.string ?? "no name"
     ])
 }
 
 /**
-    Here's an example of using type-safe routing to ensure 
+    Here's an example of using type-safe routing to ensure
     only requests to "posts/<some-integer>" will be handled.
 
     String is the most general and will match any request
@@ -129,7 +128,7 @@ drop.get("leaf") { request in
 
 /**
     A custom validator definining what
-    constitutes a valid name. Here it is 
+    constitutes a valid name. Here it is
     defined as an alphanumeric string that
     is between 5 and 20 characters.
 */
@@ -164,7 +163,7 @@ class Employee {
 */
 extension Employee: JSONRepresentable {
     func makeJSON() throws -> JSON {
-        return try JSON([
+        return try JSON(node: [
             "email": email.value,
             "name": name.value
         ])
@@ -191,7 +190,7 @@ drop.get("plaintext") { request in
     enabled–the data will persist with each request.
 */
 drop.get("session") { request in
-    let json = try JSON([
+    let json = try JSON(node: [
         "session.data": "\(request.session)",
         "request.cookies": "\(request.cookies)",
         "instructions": "Refresh to see cookie and session get set."
@@ -218,26 +217,26 @@ drop.get("session") { request in
     the language code.
 */
 drop.get("localization", String.self) { request, lang in
-    return try JSON([
+    return try JSON(node: [
         "title": drop.localization[lang, "welcome", "title"],
         "body": drop.localization[lang, "welcome", "body"]
     ])
 }
 
 /**
-    Middleware is a great place to filter 
-    and modifying incoming requests and outgoing responses. 
+    Middleware is a great place to filter
+    and modifying incoming requests and outgoing responses.
 
     Check out the middleware in App/Middleware.
 
     You can also add middleware to a single route by
-    calling the routes inside of `app.middleware(MiddlewareType) { 
+    calling the routes inside of `app.middleware(MiddlewareType) {
         app.get() { ... }
     }`
 */
 drop.middleware.append(SampleMiddleware())
 
-let port = drop.config["app", "port"].int ?? 80
+let port = drop.config["app", "port"]?.int ?? 80
 
 // Print what link to visit for default port
 drop.serve()
