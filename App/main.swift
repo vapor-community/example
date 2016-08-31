@@ -121,13 +121,9 @@ let users = UserController(droplet: drop)
 drop.resource("users", users)
 
 drop.get("leaf") { request in
-    do {
-        return try drop.view.make("template", [
-            "greeting": "Hello, world!"
-        ])
-    } catch {
-        return "Whoops: \n\(error)"
-    }
+    return try drop.view.make("template", [
+        "greeting": "Hello, world!"
+    ])
 }
 
 /**
