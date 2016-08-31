@@ -1,3 +1,3 @@
-#embed("includes/header")
+#embed("embeds/header")
 
 <h1>#(greeting)</h1>
