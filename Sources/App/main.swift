@@ -1,14 +1,5 @@
 import Vapor
-import VaporMustache
 import HTTP
-
-/**
-    Mustache partial templates (includes) must be specified ahead.
-*/
-let mustache = VaporMustache.Provider(withIncludes: [
-    "header": "Includes/header.mustache"
-])
-
 
 /**
     Droplets are service containers that make accessing
@@ -17,7 +8,7 @@ let mustache = VaporMustache.Provider(withIncludes: [
     or `drop.client()` to create a client for
     request data from other servers.
 */
-let drop = Droplet(initializedProviders: [mustache])
+let drop = Droplet()
 
 /**
     Vapor configuration files are located
@@ -30,7 +21,7 @@ let drop = Droplet(initializedProviders: [mustache])
 
     Read the docs to learn more
 */
-let _ = drop.config["app", "key"].string ?? ""
+let _ = drop.config["app", "key"]?.string ?? ""
 
 /**
     This first route will return the welcome.html
@@ -43,7 +34,7 @@ let _ = drop.config["app", "key"].string ?? ""
     --workDir to the application upon execution.
 */
 drop.get("/") { request in
-    return try drop.view("welcome.html")
+    return try drop.view.make("welcome.html")
 }
 
 /**
@@ -60,13 +51,13 @@ drop.get("/") { request in
     were a native JSON data type.
 */
 drop.get("json") { request in
-    return try JSON([
+    return try JSON(node: [
         "number": 123,
         "string": "test",
-        "array": try JSON([
+        "array": try JSON(node: [
             0, 1, 2, 3
         ]),
-        "dict": try JSON([
+        "dict": try JSON(node: [
             "name": "Vapor",
             "lang": "Swift"
         ])
@@ -96,9 +87,9 @@ drop.get("json") { request in
     - MultiPart: request.data.multipart
 */
 drop.get("data", Int.self) { request, int in
-    return try JSON([
+    return try JSON(node: [
         "int": int,
-        "name": request.data["name"].string ?? "no name"
+        "name": request.data["name"]?.string ?? "no name"
     ])
 }
 
@@ -129,13 +120,8 @@ drop.get("posts", Int.self) { request, postId in
 let users = UserController(droplet: drop)
 drop.resource("users", users)
 
-/**
-    VaporMustache hooks into Vapor's view class to
-    allow rendering of Mustache templates. You can
-    even reference included files setup through the provider.
-*/
-drop.get("mustache") { request in
-    return try drop.view("template.mustache", context: [
+drop.get("leaf") { request in
+    return try drop.view.make("template", [
         "greeting": "Hello, world!"
     ])
 }
@@ -177,7 +163,7 @@ class Employee {
 */
 extension Employee: JSONRepresentable {
     func makeJSON() throws -> JSON {
-        return try JSON([
+        return try JSON(node: [
             "email": email.value,
             "name": name.value
         ])
@@ -204,7 +190,7 @@ drop.get("plaintext") { request in
     enabled–the data will persist with each request.
 */
 drop.get("session") { request in
-    let json = try JSON([
+    let json = try JSON(node: [
         "session.data": "\(request.session)",
         "request.cookies": "\(request.cookies)",
         "instructions": "Refresh to see cookie and session get set."
@@ -231,7 +217,7 @@ drop.get("session") { request in
     the language code.
 */
 drop.get("localization", String.self) { request, lang in
-    return try JSON([
+    return try JSON(node: [
         "title": drop.localization[lang, "welcome", "title"],
         "body": drop.localization[lang, "welcome", "body"]
     ])
@@ -250,7 +236,7 @@ drop.get("localization", String.self) { request, lang in
 */
 drop.middleware.append(SampleMiddleware())
 
-let port = drop.config["app", "port"].int ?? 80
+let port = drop.config["app", "port"]?.int ?? 80
 
 // Print what link to visit for default port
 drop.serve()
