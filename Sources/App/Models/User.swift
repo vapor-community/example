@@ -28,3 +28,9 @@ final class User: Model {
         //
     }
 }
+
+extension User {
+    public convenience init?(from string: String) throws {
+        self.init(name: string)
+    }
+}
