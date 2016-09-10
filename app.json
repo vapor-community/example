@@ -4,7 +4,10 @@
     "env": {},
     "formation": {},
     "addons": [],
+    "description": "A sample application featuring some of Vapor's functionality",
+    "logo": "https://pbs.twimg.com/profile_images/760551690902900737/9vosg_bf.jpg",
     "repository": "https://github.com/vapor/example",
+    "keywords": ["swift", "vapor", "example"],
     "buildpacks": [
         {
             "url": "https://github.com/vapor/heroku-buildpack"
