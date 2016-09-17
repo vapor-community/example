@@ -239,4 +239,4 @@ drop.middleware.append(SampleMiddleware())
 let port = drop.config["app", "port"]?.int ?? 80
 
 // Print what link to visit for default port
-drop.serve()
+drop.run()
