@@ -191,13 +191,13 @@ drop.get("plaintext") { request in
 */
 drop.get("session") { request in
     let json = try JSON(node: [
-        "session.data": "\(request.session)",
+        "session.data": "\(request.session().data["name"])",
         "request.cookies": "\(request.cookies)",
         "instructions": "Refresh to see cookie and session get set."
     ])
     var response = try Response(status: .ok, json: json)
 
-    request.session?["name"] = "Vapor"
+    try request.session().data["name"] = "Vapor"
     response.cookies["test"] = "123"
 
     return response
@@ -239,4 +239,4 @@ drop.middleware.append(SampleMiddleware())
 let port = drop.config["app", "port"]?.int ?? 80
 
 // Print what link to visit for default port
-drop.serve()
+drop.run()

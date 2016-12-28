@@ -35,7 +35,7 @@ final class UserController: ResourceRepresentable {
 
     func update(request: Request, item user: User) throws -> ResponseRepresentable {
         //User is JsonRepresentable
-        return user.makeJSON()
+        return try user.makeJSON()
     }
 
     func destroy(request: Request, item user: User) throws -> ResponseRepresentable {
