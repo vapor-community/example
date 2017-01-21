@@ -4,6 +4,7 @@
     "env": {},
     "formation": {},
     "addons": [],
+    "repository": "https://github.com/qutheory/vapor-example",
     "buildpacks": [
         {
             "url": "https://github.com/kylef/heroku-buildpack-swift"
