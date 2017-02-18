@@ -1,16 +1,10 @@
 # Michigan Swift's Website
 
-This is the source code of [MiSwift.com](http://www.miswift.com)
-
-
-## Badges
-
-[![PRs Welcome](https://img.shields.io/badge/prs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![Slack Status](https://aaswift.herokuapp.com/badge.svg?style=flat-square)](https://aaswift.herokuapp.com)
+This is the source code of [MiSwift.com](http://www.miswift.com) [![PRs Welcome](https://img.shields.io/badge/prs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 ## Community 
 
-Join us on [Slack](http://bit.ly/miswift) and [Meetup](http://www.meetup.com/mi-swift).
+Join us on [Slack](http://bit.ly/miswift)([![Slack Status](https://aaswift.herokuapp.com/badge.svg?style=flat-square)](https://aaswift.herokuapp.com)) and [Meetup](http://www.meetup.com/mi-swift).
 
 ## Deploy
 
