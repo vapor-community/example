@@ -7,7 +7,7 @@ Check out the [live demo](http://example.qutheory.io) running on Ubuntu.
 ## Badges
 [![Build Status](https://img.shields.io/travis/qutheory/vapor-example.svg?style=flat-square)](https://travis-ci.org/qutheory/vapor-example)
 [![PRs Welcome](https://img.shields.io/badge/prs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![Slack Status](http://slack.qutheory.io/badge.svg?style=flat-square)](http://slack.qutheory.io)
+[![Slack Status](http://slack.qutheory.io/badge.svg?style=flat-square)](https://aaswift.herokuapp.com)
 
 ## Deploy
 
