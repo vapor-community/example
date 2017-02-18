@@ -4,7 +4,8 @@ This is the source code of [MiSwift.com](http://www.miswift.com) [![PRs Welcome]
 
 ## Community 
 
-Join us on [Slack](http://bit.ly/miswift)[![Slack Status](https://aaswift.herokuapp.com/badge.svg?style=flat-square)](https://aaswift.herokuapp.com) and [Meetup](http://www.meetup.com/mi-swift).
+Join us on [Slack](http://bit.ly/miswift) and [Meetup](http://www.meetup.com/mi-swift).
+[![Slack Status](https://aaswift.herokuapp.com/badge.svg?style=flat-square)](https://aaswift.herokuapp.com)
 
 ## Deploy
 
