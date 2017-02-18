@@ -34,8 +34,7 @@ let _ = drop.config["app", "key"]?.string ?? ""
     --workDir to the application upon execution.
 */
 drop.get("/") { request in
-
-	return "Why is Kevin's kid here?"
+	return try drop.view.make("home")
 }
 
 /**
