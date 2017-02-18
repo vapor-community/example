@@ -1,0 +1,6 @@
+#extend("master")
+
+#export("embeds/header")
+
+
+#export("embeds/footer")

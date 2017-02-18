@@ -1,7 +1,12 @@
 <head>
+<title>Michigan Swift</title>
 	<style>
 		body {
 			font-family: -apple-system, sans-serif;
 		}
 	</style>
+<link rel="stylesheet" href="styles/app.css">
+
 </head>
+<body>
+<h1 id="logo">Michigan Swift</h1>
