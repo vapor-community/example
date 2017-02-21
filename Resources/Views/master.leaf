@@ -1,3 +1,12 @@
-#embed("embeds/header")
-
-#embed("embeds/footer")
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        #import("head")
+    </head>
+    <body>
+        #import("body")
+        #import("footer")
+    </body>
+    
+</html>

@@ -1,4 +1,3 @@
-<head>
 <title>Michigan Swift</title>
 	<style>
 		body {
@@ -6,4 +5,3 @@
 		}
 	</style>
 <link rel="stylesheet" href="styles/app.css">
-</head>
