@@ -1,4 +1,3 @@
-<head>
 <title>Michigan Swift</title>
 	<style>
 		body {
@@ -6,16 +5,3 @@
 		}
 	</style>
 <link rel="stylesheet" href="styles/app.css">
-
-</head>
-<body>
-<h1 id="logo">Michigan Swift</h1>
-<center>
-<p><a href="http://www.meetup.com/mi-swift">Join us on Meetup</a>.</p>
-<p><a href="http://www.bit.ly/miswift">Join us on Slack</a>.</p>
-#if(link) {
-<p>Join the #(attendees) Swifty People who are planning to attend the upcoming meetup — <a href=#(link)>#(name)</A></p>
-}##else() {
-<p>No future meetups planned at this time.</p>
-}
-</center>
