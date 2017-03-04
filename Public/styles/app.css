@@ -22,7 +22,7 @@ a {
 }
 
 a:hover {
-	color: #F7CAC9;
+	color: #ff7a28;
 }
 
 div.wrapper {
@@ -39,9 +39,10 @@ h1#logo {
 	text-indent: -9999px;
 	background-image: url(../images/logo.png);
 	background-size: 100%;
-	width: 300px;
-	height: 300px;
+	width: 65px;
+	height: 65px;
 	margin: 0 auto;
+	float: left;
 }
 
 nav.main {
@@ -49,17 +50,29 @@ nav.main {
 	margin-top: 20px;
 }
 nav.main ul {
+	list-style-type: none;
 	margin: 0;
 	padding: 0;
+	overflow: hidden;
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ff892a+0,ff1d1a+100 */
+	background: #ff1d1a; /* Old browsers */
+	background: -moz-linear-gradient(top,  #ff892a 0%, #ff1d1a 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  #ff892a 0%,#ff1d1a 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  #ff892a 0%,#ff1d1a 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff892a', endColorstr='#ff1d1a',GradientType=0 ); /* IE6-9 */
 }
+
 nav.main ul li {
 	display: inline-block;
 	padding: 0 5px;
+	float: left;
+
 }
 
 
 footer.main {
 	position: absolute;
+	background:#111!important;
 	width: 100%;
 	text-align: center;
 	bottom: 10px;
@@ -74,4 +87,44 @@ footer.main p {
 
 footer.main p a {
 	color: #ccc;
+}
+
+footer.main li {
+	list-style-type: none;
+	float: left;
+
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #ff1d1a;
+		color: white;
+
+}
+
+
+
+button {
+	background: transparent;
+color: #59569E;
+border: 2px solid #ebebf2;
+border-radius: 0 6px 6px 0;
+height: 46px;
+padding: 10px 16px;
+font-size: 18px;
+line-height: 1.33;
+}
+
+email {
+	border-radius: 6px 0 0 6px;
+	height: 46px;
+	float:right!important;
+
 }

@@ -1,6 +1,7 @@
 import Vapor
 import HTTP
 
+
 /**
     Droplets are service containers that make accessing
     all of Vapor's features easy. Just call
@@ -22,6 +23,7 @@ let drop = Droplet()
     Read the docs to learn more
 */
 let _ = drop.config["app", "key"]?.string ?? ""
+
 
 /**
     This first route will return the welcome.html

@@ -1,4 +1,28 @@
-<footer class="main">
-<p>Powered by Swift. Built by <a href="http://www.miswift.com">Michigan Swift</a>.</p>
+<footer class=main>
+  <ul>
+    <li><a href="http://www.twitter.com/swifchigan">Twitter</a></li>
+    <li><a href="https://www.facebook.com/michiganswift">Facebook</a></li>
+    <li><a href="http://www.meetup.com/mi-swift">Meetup</a>.</li>
+    <li><a href="http://www.bit.ly/miswift">Slack</a>.</li>
+    <li>
+      <div id="mc_embed_signup" class=email>
+      <form action="//MiSwift.us15.list-manage.com/subscribe/post?u=bd440818e78f79ad1c289b849&amp;id=f07b0716cf" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+        <div>
+          <label for="mce-EMAIL"></label>
+        	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Email address">
+          <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
+        </div>
+      	<div id="mce-responses" class="clear">
+      		<div class="response" id="mce-error-response" style="display:none"></div>
+      		<div class="response" id="mce-success-response" style="display:none"></div>
+      	</div>
+        <div style="position: absolute; left: -5000px;" aria-hidden="true">
+          <input type="text" name="b_bd440818e78f79ad1c289b849_f07b0716cf" tabindex="-1" value="">
+        </div>
+      </form>
+      </div>
+    </li>
+  </ul>
 </footer>
 </body>
+</html>
