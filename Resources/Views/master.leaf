@@ -1,0 +1,3 @@
+#embed("embeds/header")
+#embed("embeds/navbar")
+#embed("embeds/footer")

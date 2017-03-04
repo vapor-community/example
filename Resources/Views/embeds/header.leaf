@@ -1,7 +1,11 @@
 <head>
-	<style>
-		body {
-			font-family: -apple-system, sans-serif;
-		}
-	</style>
+<title>Michigan Swift</title>
+<link rel="stylesheet" href="styles/app.css">
 </head>
+<body>
+#if(link) {
+<p>Join the #(attendees) Swifty People who are planning to attend the upcoming meetup — <a href=#(link)>#(name)</A></p>
+}##else() {
+<p>No future meetups planned at this time.</p>
+}
+</center>

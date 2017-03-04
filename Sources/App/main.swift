@@ -1,6 +1,7 @@
 import Vapor
 import HTTP
 
+
 /**
     Droplets are service containers that make accessing
     all of Vapor's features easy. Just call
@@ -23,6 +24,7 @@ let drop = Droplet()
 */
 let _ = drop.config["app", "key"]?.string ?? ""
 
+
 /**
     This first route will return the welcome.html
     view to any request to the root directory of the website.
@@ -34,7 +36,22 @@ let _ = drop.config["app", "key"]?.string ?? ""
     --workDir to the application upon execution.
 */
 drop.get("/") { request in
-    return try drop.view.make("welcome.html")
+    // Get the next meetup from the meetup.com API
+    let meetupResponse = try drop.client.get("https://api.meetup.com/mi-swift/events?photo-host=public&page=1&sig_id=92233812")
+    // Initialize variables
+    var attendees: Int? // The number of attendees who have RSVP'd Yes
+    var link, name: String? // A URL to the event page and the title of the event
+    if let response = try JSON(bytes: meetupResponse.body.bytes!)[0] {
+        attendees = response["yes_rsvp_count"]?.node.int
+        link = response["link"]?.string
+        name = response["name"]?.string
+    }
+    if let attendees = attendees, let link = link, let name = name {
+        // If we have data from the API, pass it to the template
+        return try drop.view.make("home", Node(node: ["attendees": "\(attendees)", "link": "\(link)", "name": "\(name)"]))
+    } else {
+        return try drop.view.make("home")
+    }
 }
 
 /**
