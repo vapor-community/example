@@ -37,10 +37,10 @@ div.wrapper {
 
 h1#logo {
 	text-indent: -9999px;
-	background-image: url(../images/vapor-logo.png);
+	background-image: url(../images/logo.png);
 	background-size: 100%;
-	width: 347.5px;
-	height: 84px;
+	width: 300px;
+	height: 300px;
 	margin: 0 auto;
 }
 

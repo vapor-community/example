@@ -1,0 +1,20 @@
+#extend("master")
+
+#export("head") {
+#embed("embeds/header")
+}
+#export("body") {
+    <h1 id="logo">Michigan Swift</h1>
+    <center>
+        <p><a href="http://www.meetup.com/mi-swift">Join us on Meetup</a>.</p>
+        <p><a href="http://www.bit.ly/miswift">Join us on Slack</a>.</p>
+        #if(name) {
+        <p>Join the #(yes_rsvp_count) #(group.who) who are planning to attend the upcoming meetup — <a href=#(link)>#(name)</A></p>
+        }##else() {
+        <p>No future meetups planned at this time.</p>
+        }
+    </center>
+}
+#export("footer") {
+#embed("embeds/footer")
+}
